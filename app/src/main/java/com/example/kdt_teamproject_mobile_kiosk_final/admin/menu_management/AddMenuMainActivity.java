@@ -301,6 +301,8 @@ public class AddMenuMainActivity extends Fragment {
                             if (isAdded()) {
                                 FragmentManager childFragmentManager = getChildFragmentManager();
                                 childFragmentManager.beginTransaction().replace(R.id.fragmentBoard01, mainFrag).commit();
+                                FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+                                ft.detach(mainFrag).attach(mainFrag).commit();
                             }
                         } else {
                             Log.d("DocSnippets", "Error getting documents: ", task.getException());

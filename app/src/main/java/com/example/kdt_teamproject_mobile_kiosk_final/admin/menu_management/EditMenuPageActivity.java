@@ -2,6 +2,7 @@ package com.example.kdt_teamproject_mobile_kiosk_final.admin.menu_management;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -101,7 +102,7 @@ public class EditMenuPageActivity extends Fragment {
         mainActivity = new AddMenuMainActivity();
 
         final String[] element = {"-선택-", "메인", "사이드", "음료"};
-        ArrayAdapter adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, element);
+        ArrayAdapter adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, element);
         categorySpinner.setAdapter(adapter);
 
         int selectionNum = 0;

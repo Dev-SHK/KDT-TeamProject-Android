@@ -71,7 +71,7 @@ public class MenuItemPageActivity extends Fragment {
                     String optPrice05 = menuLists.get(index).getOptPrice05();
                     String imgPath = menuLists.get(index).getImgPath();
                     if (menuItemLayout.getId() == index){
-                        if (clickable == false) {
+                        if (!clickable) {
                             menuItemLayout.setBackgroundResource(R.drawable.itembutton_t);
                             clickable = true;
                         } else {
