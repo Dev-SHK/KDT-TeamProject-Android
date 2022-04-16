@@ -49,7 +49,7 @@ import java.util.List;
 
 public class AddMenuMainActivity extends Fragment {
 
-    Button mainBtn, sideBtn, etcBtn, insertBtn, modifyBtn, deleteBtn, modifyPageBtn;
+    Button mainBtn, sideBtn, etcBtn, insertBtn, modifyPageBtn;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     List<MenuList> mainList;
     List<MenuList> sideList;
@@ -58,7 +58,6 @@ public class AddMenuMainActivity extends Fragment {
     static MenuList menuList;
     private final int GALLERY_CODE = 1112;
     static String imgPath;
-    String saveName;
 
     @Nullable
     @Override
@@ -255,6 +254,7 @@ public class AddMenuMainActivity extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            menuLists.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String menuNum = (String) document.getData().get("MenuNum");
                                 String menuName = (String) document.getData().get("MenuName");
@@ -302,10 +302,6 @@ public class AddMenuMainActivity extends Fragment {
                                 FragmentManager childFragmentManager = getChildFragmentManager();
                                 childFragmentManager.beginTransaction().replace(R.id.fragmentBoard01, mainFrag).commit();
                             }
-//                            System.out.println("mainFrag : " + mainFrag);
-//                            FragmentTransaction transaction = childFragment.beginTransaction();
-//                            transaction.replace(R.id.fragmentBoard01, mainFrag);
-//                            transaction.commitAllowingStateLoss();
                         } else {
                             Log.d("DocSnippets", "Error getting documents: ", task.getException());
                         }
@@ -330,7 +326,6 @@ public class AddMenuMainActivity extends Fragment {
             transaction.commitAllowingStateLoss();
         }
     }
-
 
 
 }

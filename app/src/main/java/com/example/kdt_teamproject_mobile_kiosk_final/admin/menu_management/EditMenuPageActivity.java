@@ -118,27 +118,32 @@ public class EditMenuPageActivity extends Fragment {
         }
 
         if (!menuList.getOptSize01().equals("")) {
+            optSwitch01.setChecked(true);
             optLayout01_01.setVisibility(View.VISIBLE);
             optLayout01_02.setVisibility(View.VISIBLE);
         }
         if (!menuList.getOptSize02().equals("")) {
+            optSwitch02.setChecked(true);
             optLayout02_01.setVisibility(View.VISIBLE);
             optLayout02_02.setVisibility(View.VISIBLE);
         }
         if (!menuList.getOptSize03().equals("")) {
+            optSwitch03.setChecked(true);
             optLayout03_01.setVisibility(View.VISIBLE);
             optLayout03_02.setVisibility(View.VISIBLE);
         }
         if (!menuList.getOptKind01().equals("")) {
+            optSwitch04.setChecked(true);
             optLayout04_01.setVisibility(View.VISIBLE);
             optLayout04_02.setVisibility(View.VISIBLE);
         }
         if (!menuList.getOptKind02().equals("")) {
+            optSwitch05.setChecked(true);
             optLayout05_01.setVisibility(View.VISIBLE);
             optLayout05_02.setVisibility(View.VISIBLE);
         }
         Bitmap bitmap = BitmapFactory.decodeFile(menuList.getImgPath());
-        insertMenuNum.setText(menuList.getMenuNum().toString());
+        insertMenuNum.setText(menuList.getMenuNum());
         insertMenuN.setText(menuList.getMenuName());
         insertMenuP.setText(menuList.getMenuPrice());
         insertMenuD.setText(menuList.getMenuDetail());
@@ -155,6 +160,7 @@ public class EditMenuPageActivity extends Fragment {
         optEditKind05_1.setText(menuList.getOptKind02());
         optEditPrice05_2.setText(menuList.getOptPrice05());
         imageView.setImageBitmap(bitmap);
+        imgPathTxt.setText(menuList.getImgPath());
 
         EnterpriseUserAccount userAccount = LoginActivity.userAccount;
         String emailId = userAccount.getEpEmailID();
@@ -189,6 +195,7 @@ public class EditMenuPageActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 modifyFragState = true;
+                mainActivity.checkSelfPermission();
                 mainActivity.selectGallery();
             }
         });
@@ -198,75 +205,80 @@ public class EditMenuPageActivity extends Fragment {
             public void onClick(View view) {
                 Map<String, Object> menu = new HashMap<>();
 
-                String menuNum = insertMenuNum.getText().toString();
-                String menuName = insertMenuN.getText().toString();
-                String menuPrice = insertMenuP.getText().toString();
-                String menuDetail = insertMenuD.getText().toString();
-                String menuCG = categorySpinner.getSelectedItem().toString();
-                Boolean stockState = stateSwitch.isChecked();
-                String optSize01 = optEditSize01_1.getText().toString();
-                String optPrice01 = optEditPrice01_2.getText().toString();
-                String optSize02 = optEditSize02_1.getText().toString();
-                String optPrice02 = optEditPrice02_2.getText().toString();
-                String optSize03 = optEditSize03_1.getText().toString();
-                String optPrice03 = optEditPrice03_2.getText().toString();
-                String optKind01 = optEditKind04_1.getText().toString();
-                String optPrice04 = optEditPrice04_2.getText().toString();
-                String optKind02 = optEditKind05_1.getText().toString();
-                String optPrice05 = optEditPrice05_2.getText().toString();
-                String imgPath = imgPathTxt.getText().toString();
+                if (insertMenuNum.getText().toString().equals("") | insertMenuN.getText().toString().equals("") |
+                        insertMenuP.getText().toString().equals("") | categorySpinner.getSelectedItem().toString().equals("-선택-")) {
+                    Toast.makeText(context, "필수항목을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                } else {
+                    String menuNum = insertMenuNum.getText().toString();
+                    String menuName = insertMenuN.getText().toString();
+                    String menuPrice = insertMenuP.getText().toString();
+                    String menuDetail = insertMenuD.getText().toString();
+                    String menuCG = categorySpinner.getSelectedItem().toString();
+                    Boolean stockState = stateSwitch.isChecked();
+                    String optSize01 = optEditSize01_1.getText().toString();
+                    String optPrice01 = optEditPrice01_2.getText().toString();
+                    String optSize02 = optEditSize02_1.getText().toString();
+                    String optPrice02 = optEditPrice02_2.getText().toString();
+                    String optSize03 = optEditSize03_1.getText().toString();
+                    String optPrice03 = optEditPrice03_2.getText().toString();
+                    String optKind01 = optEditKind04_1.getText().toString();
+                    String optPrice04 = optEditPrice04_2.getText().toString();
+                    String optKind02 = optEditKind05_1.getText().toString();
+                    String optPrice05 = optEditPrice05_2.getText().toString();
+                    String imgPath = imgPathTxt.getText().toString();
 
 
-                menu.put("MenuNum", menuNum);
-                menu.put("MenuName", menuName);
-                menu.put("MenuPrice", menuPrice);
-                menu.put("MenuDetail", menuDetail);
-                menu.put("MenuCG", menuCG);
-                menu.put("StockState", stockState);
-                menu.put("OptSize01", optSize01);
-                menu.put("OptPrice01", optPrice01);
-                menu.put("OptSize02", optSize02);
-                menu.put("OptPrice02", optPrice02);
-                menu.put("OptSize03", optSize03);
-                menu.put("OptPrice03", optPrice03);
-                menu.put("OptKind01", optKind01);
-                menu.put("OptPrice04", optPrice04);
-                menu.put("OptKind02", optKind02);
-                menu.put("OptPrice05", optPrice05);
-                menu.put("ImagePath", imgPath);
+                    menu.put("MenuNum", menuNum);
+                    menu.put("MenuName", menuName);
+                    menu.put("MenuPrice", menuPrice);
+                    menu.put("MenuDetail", menuDetail);
+                    menu.put("MenuCG", menuCG);
+                    menu.put("StockState", stockState);
+                    menu.put("OptSize01", optSize01);
+                    menu.put("OptPrice01", optPrice01);
+                    menu.put("OptSize02", optSize02);
+                    menu.put("OptPrice02", optPrice02);
+                    menu.put("OptSize03", optSize03);
+                    menu.put("OptPrice03", optPrice03);
+                    menu.put("OptKind01", optKind01);
+                    menu.put("OptPrice04", optPrice04);
+                    menu.put("OptKind02", optKind02);
+                    menu.put("OptPrice05", optPrice05);
+                    menu.put("ImagePath", imgPath);
 
-                Log.d("Menu DB => ", menu.toString());
+                    Log.d("Menu DB => ", menu.toString());
 
-                menuList = new MenuList(menuNum, menuName, menuPrice, menuDetail, menuCG,
-                        stockState, optSize01, optPrice01, optSize02, optPrice02, optSize03,
-                        optPrice03, optKind01, optPrice04, optKind02, optPrice05, imgPath);
-                firestore.collection("Enterprise_Users").document(emailId)
-                        .collection("MenuList").document((menuList.getMenuNum())).set(menu).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(context, "수정완료", Toast.LENGTH_SHORT).show();
-                        switch (menuCG) {
-                            case "메인":
-                                mainActivity.selectAll("main");
-                                break;
-                            case "사이드":
-                                mainActivity.selectAll("side");
-                                break;
-                            case "음료":
-                                mainActivity.selectAll("음료");
-                                break;
+                    menuList = new MenuList(menuNum, menuName, menuPrice, menuDetail, menuCG,
+                            stockState, optSize01, optPrice01, optSize02, optPrice02, optSize03,
+                            optPrice03, optKind01, optPrice04, optKind02, optPrice05, imgPath);
+                    firestore.collection("Enterprise_Users").document(emailId)
+                            .collection("MenuList").document((menuList.getMenuNum())).set(menu).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(context, "수정완료", Toast.LENGTH_SHORT).show();
+                            switch (menuCG) {
+                                case "메인":
+                                    mainActivity.selectAll("main");
+                                    break;
+                                case "사이드":
+                                    mainActivity.selectAll("side");
+                                    break;
+                                case "음료":
+                                    mainActivity.selectAll("음료");
+                                    break;
+                            }
+                            AddMenuPageActivity appendFrag = new AddMenuPageActivity(context, menuList);
+                            mainActivity.RViewChange(appendFrag, null);
                         }
-                        AddMenuPageActivity appendFrag = new AddMenuPageActivity(context, menuList);
-                        mainActivity.RViewChange(appendFrag, null);
-                    }
-                });
+                    });
+                }
             }
         });
 
         optSwitch01.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (optSwitch01.isChecked() == true) {
+                if (optSwitch01.isChecked()) {
                     optLayout01_01.setVisibility(View.VISIBLE);
                     optLayout01_02.setVisibility(View.VISIBLE);
                 } else {
@@ -279,7 +291,7 @@ public class EditMenuPageActivity extends Fragment {
         optSwitch02.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (optSwitch02.isChecked() == true) {
+                if (optSwitch02.isChecked()) {
                     optLayout02_01.setVisibility(View.VISIBLE);
                     optLayout02_02.setVisibility(View.VISIBLE);
                 } else {
@@ -292,7 +304,7 @@ public class EditMenuPageActivity extends Fragment {
         optSwitch03.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (optSwitch03.isChecked() == true) {
+                if (optSwitch03.isChecked()) {
                     optLayout03_01.setVisibility(View.VISIBLE);
                     optLayout03_02.setVisibility(View.VISIBLE);
                 } else {
@@ -305,7 +317,7 @@ public class EditMenuPageActivity extends Fragment {
         optSwitch04.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (optSwitch04.isChecked() == true) {
+                if (optSwitch04.isChecked()) {
                     optLayout04_01.setVisibility(View.VISIBLE);
                     optLayout04_02.setVisibility(View.VISIBLE);
                 } else {
@@ -318,7 +330,7 @@ public class EditMenuPageActivity extends Fragment {
         optSwitch05.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (optSwitch05.isChecked() == true) {
+                if (optSwitch05.isChecked()) {
                     optLayout05_01.setVisibility(View.VISIBLE);
                     optLayout05_02.setVisibility(View.VISIBLE);
                 } else {
