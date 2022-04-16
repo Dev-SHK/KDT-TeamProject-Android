@@ -4,12 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -155,9 +160,11 @@ public class AdminMenuActivity extends AppCompatActivity {
             case 1:
                 break;
             case 2:
-                AddMenuMainActivity menuMainActivity = new AddMenuMainActivity();
-                transaction.replace(R.id.fragment_container, menuMainActivity);
-                transaction.commit();
+//                AddMenuMainActivity menuMainActivity = new AddMenuMainActivity();
+//                transaction.replace(R.id.fragment_container, menuMainActivity);
+//                transaction.commit();
+                getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
+                        .add(R.id.fragment_container, AddMenuMainActivity.class, null).commit();
                 break;
             case 3:
                 break;

@@ -189,7 +189,6 @@ public class EditMenuPageActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 modifyFragState = true;
-                mainActivity.checkSelfPermission();
                 mainActivity.selectGallery();
             }
         });

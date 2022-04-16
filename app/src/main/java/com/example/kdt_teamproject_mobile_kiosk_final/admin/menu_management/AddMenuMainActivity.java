@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -32,6 +33,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.kdt_teamproject_mobile_kiosk_final.R;
+import com.example.kdt_teamproject_mobile_kiosk_final.admin.AdminMenuActivity;
 import com.example.kdt_teamproject_mobile_kiosk_final.admin.LoginActivity;
 import com.example.kdt_teamproject_mobile_kiosk_final.model.EnterpriseUserAccount;
 import com.example.kdt_teamproject_mobile_kiosk_final.model.MenuList;
@@ -186,13 +188,13 @@ public class AddMenuMainActivity extends Fragment {
         String temp = "";
 
         // 파일 읽기 권한 확인
-        if (ContextCompat.checkSelfPermission(getContext(),
+        if (ContextCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             temp += Manifest.permission.READ_EXTERNAL_STORAGE + " ";
         }
 
         // 파일 쓰기 권한 확인
-        if (ContextCompat.checkSelfPermission(getContext(),
+        if (ContextCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             temp += Manifest.permission.WRITE_EXTERNAL_STORAGE + " ";
         }
@@ -296,8 +298,10 @@ public class AddMenuMainActivity extends Fragment {
                                 }
                             }
 
-                            FragmentManager childFragmentManager = getChildFragmentManager();
-                            childFragmentManager.beginTransaction().replace(R.id.fragmentBoard01, mainFrag).commit();
+                            if (isAdded()) {
+                                FragmentManager childFragmentManager = getChildFragmentManager();
+                                childFragmentManager.beginTransaction().replace(R.id.fragmentBoard01, mainFrag).commit();
+                            }
 //                            System.out.println("mainFrag : " + mainFrag);
 //                            FragmentTransaction transaction = childFragment.beginTransaction();
 //                            transaction.replace(R.id.fragmentBoard01, mainFrag);
@@ -315,7 +319,7 @@ public class AddMenuMainActivity extends Fragment {
     }
 
     public void RViewChange(AddMenuPageActivity appendFrag, EditMenuPageActivity modifyFrag) {
-
+        if (!isAdded()) return;
         if (appendFrag == null) {
             FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
             transaction.replace(R.id.fragmentBoard02, modifyFrag);

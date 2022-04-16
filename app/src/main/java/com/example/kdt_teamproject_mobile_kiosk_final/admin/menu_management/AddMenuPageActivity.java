@@ -105,7 +105,6 @@ public class AddMenuPageActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 appendFragState = true;
-                mainActivity.checkSelfPermission();
                 mainActivity.selectGallery();
 
             }
