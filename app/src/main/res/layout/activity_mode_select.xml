@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ModeSelectActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnAdminMode"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/border_round"
+            android:text="관리자 모드"
+            android:textSize="35dp" />
+
+        <Button
+            android:id="@+id/btnKioskMode"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/border_round"
+            android:text="키오스크"
+            android:textSize="35dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

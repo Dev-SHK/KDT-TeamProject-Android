@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "755552378789",
+    "project_id": "kdt-teamproject-kiosk-final",
+    "storage_bucket": "kdt-teamproject-kiosk-final.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755552378789:android:f4c80b03fd3c368ff8124c",
+        "android_client_info": {
+          "package_name": "com.example.kdt_teamproject_mobile_kiosk_final"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755552378789-fr5i9lh17q065fmv9n3quivoedhhq4dk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJZL0F-F2GPHYwFghBeb2FUbhcBdAW_jg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755552378789-fr5i9lh17q065fmv9n3quivoedhhq4dk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

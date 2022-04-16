@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="50dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".admin.EditAccountActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtvInfoEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="회원님의 정보를 수정합니다."
+            android:textAlignment="center"
+            android:textSize="45dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="630dp"
+            android:layout_height="wrap_content"
+            android:text="ID로 사용 중인 이메일주소입니다."
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/edtTxtEmail"
+            android:layout_width="630dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/border_round"
+            android:ems="10"
+            android:hint="name@example.com"
+            android:inputType="textEmailAddress"
+            android:enabled="false"
+            android:padding="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtTxtUserName"
+                android:layout_width="305dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/border_round"
+                android:ems="10"
+                android:hint="대표자명"
+                android:inputType="text"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/edtTxtUserBirthday"
+                android:layout_width="305dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/border_round"
+                android:ems="10"
+                android:hint="생년월일"
+                android:inputType="number"
+                android:padding="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtTxtPwd"
+                android:layout_width="305dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/border_round"
+                android:ems="10"
+                android:hint="비밀번호"
+                android:inputType="textPassword"
+                android:enabled="false"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/edtTxtConfirmPwd"
+                android:layout_width="305dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/border_round"
+                android:ems="10"
+                android:hint="비밀번호 확인"
+                android:inputType="textPassword"
+                android:enabled="false"
+                android:padding="10dp" />
+
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@+id/edtTxtEpName"
+            android:layout_width="630dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/border_round"
+            android:ems="10"
+            android:hint="상호명"
+            android:inputType="text"
+            android:padding="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtTxtEpRegiNum"
+                android:layout_width="460dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/border_round"
+                android:ems="10"
+                android:hint="사업자번호"
+                android:inputType="number"
+                android:padding="10dp" />
+
+            <Button
+                android:id="@+id/btnEpRegisterNumAuth"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/border_round"
+                android:text="사업자번호 확인" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edtTxtStartDate"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:background="@drawable/border_round"
+                android:ems="10"
+                android:hint="개업일자"
+                android:inputType="date"
+                android:layout_marginHorizontal="10dp"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/edtTxtPhoneNum"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:background="@drawable/border_round"
+                android:ems="10"
+                android:hint="연락처"
+                android:inputType="text"
+                android:layout_marginHorizontal="5dp"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/edtTxtPostNum"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:background="@drawable/border_round"
+                android:ems="10"
+                android:hint="우편번호"
+                android:inputType="number"
+                android:layout_marginHorizontal="10dp"
+                android:padding="10dp" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edtTxtAddress"
+            android:layout_width="630dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/border_round"
+            android:ems="10"
+            android:hint="주소"
+            android:inputType="text"
+            android:padding="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/border_round"
+            android:text="수정하기" />
+
+        <Button
+            android:id="@+id/btnLeave"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/border_round"
+            android:text="탈퇴하기" />
+    </LinearLayout>
+
+
+</LinearLayout>
