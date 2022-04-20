@@ -7,10 +7,13 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 
 import com.example.kdt_teamproject_mobile_kiosk_final.R;
 import com.example.kdt_teamproject_mobile_kiosk_final.model.MenuList;
@@ -67,7 +70,7 @@ public class MenuItemLayout extends LinearLayout {
         this.setBackgroundResource(R.drawable.itembutton_f);
         this.setLayoutParams(layoutMargin);
 
-        if (menuList.getStockState() == true) {
+        if (menuList.getStockState()) {
             Bitmap resultBtm = overlayBitmap(upLoadImg, context);
             this.addView(menu_Img);
             menu_Img.setImageBitmap(resultBtm);
@@ -78,6 +81,7 @@ public class MenuItemLayout extends LinearLayout {
             this.addView(menu_Img);
             if (upLoadImg == null)
                 menu_Img.setImageResource(R.drawable.basic_img);
+//                menu_Img.setBackground(ContextCompat.getDrawable(context, R.drawable.border_round_thin));
             else
                 menu_Img.setImageBitmap(upLoadImg);
             menu_Img.setScaleType(ImageView.ScaleType.CENTER_CROP);

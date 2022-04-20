@@ -187,6 +187,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/border_round_thin"
+                            android:backgroundTint="#ffc0cb"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
                             android:text="이미지파일 업로드" />
@@ -486,8 +487,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
             android:background="@drawable/border_round_thin"
+            android:backgroundTint="#ffc0cb"
             android:text="추가하기"
-            android:textColor="@color/black"
             android:textSize="25dp"
             android:textStyle="bold" />
 

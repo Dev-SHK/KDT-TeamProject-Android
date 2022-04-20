@@ -32,10 +32,10 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"
                 android:background="@drawable/border_round_thin"
+                android:backgroundTint="#ffc0cb"
                 android:clickable="true"
                 android:focusable="true"
                 android:text="메인"
-                android:textColor="@color/black"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
@@ -47,8 +47,8 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"
                 android:background="@drawable/border_round_thin"
+                android:backgroundTint="#ffc0cb"
                 android:text="사이드"
-                android:textColor="@color/black"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
@@ -60,8 +60,8 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"
                 android:background="@drawable/border_round_thin"
-                android:text="음료"
-                android:textColor="@color/black"
+                android:backgroundTint="#ffc0cb"
+                android:text="기타"
                 android:textSize="25dp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -86,6 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/border_round_thin"
+                android:backgroundTint="#ffc0cb"
                 android:text="메뉴 추가" />
 
             <Button
@@ -94,6 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/border_round_thin"
+                android:backgroundTint="#ffc0cb"
                 android:text="메뉴 수정" />
 
         </LinearLayout>

@@ -21,8 +21,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kdt_teamproject_mobile_kiosk_final.ModeSelectActivity;
 import com.example.kdt_teamproject_mobile_kiosk_final.R;
+import com.example.kdt_teamproject_mobile_kiosk_final.admin.branch_management.Branch_Management;
 import com.example.kdt_teamproject_mobile_kiosk_final.admin.menu_management.AddMenuMainActivity;
+import com.example.kdt_teamproject_mobile_kiosk_final.admin.orderList.OrderListActivity;
 import com.example.kdt_teamproject_mobile_kiosk_final.model.EnterpriseUserAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,7 +41,7 @@ public class AdminMenuActivity extends AppCompatActivity {
     Toolbar toolbar;
     NavigationView navigation_view;
     DrawerLayout main_drawer_layout;
-    TextView loginInfo, orderList, menuManagement, storeManagement, settings, editUserInfo, qrCreate;
+    TextView loginInfo, home, orderList, menuManagement, storeManagement, settings, editUserInfo, qrCreate;
     EnterpriseUserAccount userAccount;
     String emailID, userName;
     Button btnLogout;
@@ -107,8 +110,24 @@ public class AdminMenuActivity extends AppCompatActivity {
             }
         });
 
+        home = findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminMenuActivity.this, ModeSelectActivity.class);
+                startActivity(intent);
+                Toast.makeText(AdminMenuActivity.this, "홈으로 이동합니다", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         // 주문내역
         orderList = findViewById(R.id.orderList);
+        orderList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentView(1);
+            }
+        });
 
         // 메뉴관리
         menuManagement = findViewById(R.id.menuManagement);
@@ -122,9 +141,12 @@ public class AdminMenuActivity extends AppCompatActivity {
 
         // 지점관리
         storeManagement = findViewById(R.id.storeManagement);
-
-        // 설정
-        settings = findViewById(R.id.settings);
+        storeManagement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentView(3);
+            }
+        });
 
         // 회원정보 수정
         editUserInfo = findViewById(R.id.editUserInfo);
@@ -136,7 +158,7 @@ public class AdminMenuActivity extends AppCompatActivity {
         });
 
         // QR코드 생성
-        qrCreate = findViewById(R.id.qrCreate);
+//        qrCreate = findViewById(R.id.qrCreate);
 
     }
 
@@ -145,10 +167,9 @@ public class AdminMenuActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (id) {
-            case android.R.id.home:
-                Toast.makeText(AdminMenuActivity.this, "햄버거 버튼 누름", Toast.LENGTH_SHORT).show();
-                return true;
+        if (id == android.R.id.home) {
+            Toast.makeText(AdminMenuActivity.this, "햄버거 버튼 누름", Toast.LENGTH_SHORT).show();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -158,6 +179,9 @@ public class AdminMenuActivity extends AppCompatActivity {
 
         switch (i) {
             case 1:
+                OrderListActivity orderList = new OrderListActivity();
+                transaction.replace(R.id.fragment_container, orderList);
+                transaction.commit();
                 break;
             case 2:
 //                AddMenuMainActivity menuMainActivity = new AddMenuMainActivity();
@@ -167,6 +191,11 @@ public class AdminMenuActivity extends AppCompatActivity {
                         .add(R.id.fragment_container, AddMenuMainActivity.class, null).commit();
                 break;
             case 3:
+//                getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
+//                        .add(R.id.fragment_container, Branch_Management.class, null).commit();
+                Branch_Management branch_management = new Branch_Management();
+                transaction.replace(R.id.fragment_container, branch_management);
+                transaction.commit();
                 break;
             case 4:
                 break;

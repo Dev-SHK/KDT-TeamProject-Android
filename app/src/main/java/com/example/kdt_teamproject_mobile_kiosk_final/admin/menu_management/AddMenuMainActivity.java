@@ -2,6 +2,7 @@ package com.example.kdt_teamproject_mobile_kiosk_final.admin.menu_management;
 
 import static android.app.Activity.RESULT_OK;
 
+import androidx.activity.result.ActivityResultCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,6 +59,10 @@ public class AddMenuMainActivity extends Fragment {
     static MenuList menuList;
     private final int GALLERY_CODE = 1112;
     static String imgPath;
+    String strMain = "메인";
+    String strSide = "사이드";
+    String strEtc = "기타";
+    Context mContext;
 
     @Nullable
     @Override
@@ -95,21 +100,21 @@ public class AddMenuMainActivity extends Fragment {
         mainBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectAll("main");
+                selectAll(strMain);
             }
         });
 
         sideBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectAll("side");
+                selectAll(strSide);
             }
         });
 
         etcBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectAll("음료");
+                selectAll(strEtc);
             }
         });
 
@@ -185,22 +190,25 @@ public class AddMenuMainActivity extends Fragment {
 
     public void checkSelfPermission() {
         String temp = "";
+        final int RESULT_CODE = 1;
+        mContext = getContext();
 
         // 파일 읽기 권한 확인
-        if (ContextCompat.checkSelfPermission(getActivity(),
+        if (mContext != null && ContextCompat.checkSelfPermission(mContext,
                 Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             temp += Manifest.permission.READ_EXTERNAL_STORAGE + " ";
         }
 
+
         // 파일 쓰기 권한 확인
-        if (ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(mContext,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             temp += Manifest.permission.WRITE_EXTERNAL_STORAGE + " ";
         }
 
         if (!TextUtils.isEmpty(temp)) {
             //권한 요청
-            ActivityCompat.requestPermissions(getActivity(), temp.trim().split(" "), 1);
+            requestPermissions(temp.trim().split(" "), 1);
         } else {
             //모두 허용 상태
             Toast.makeText(getContext(), "권한을 모두 허용합니다.", Toast.LENGTH_SHORT).show();
@@ -256,7 +264,7 @@ public class AddMenuMainActivity extends Fragment {
                         if (task.isSuccessful()) {
                             menuLists.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                String menuNum = (String) document.getData().get("MenuNum");
+                                String menuNum = (String) document.getData().get("Menu_Num");
                                 String menuName = (String) document.getData().get("MenuName");
                                 String menuPrice = (String) document.getData().get("MenuPrice");
                                 String menuDetail = (String) document.getData().get("MenuDetail");
@@ -272,7 +280,7 @@ public class AddMenuMainActivity extends Fragment {
                                 String optPrice04 = (String) document.getData().get("OptPrice04");
                                 String optKind02 = (String) document.getData().get("OptKind02");
                                 String optPrice05 = (String) document.getData().get("OptPrice05");
-                                String imgPath = (String) document.getData().get("ImagePath");
+                                String imgPath = (String) document.getData().get("Img_Path");
 
                                 menuLists.add(new MenuList(menuNum, menuName, menuPrice, menuDetail, menuCG, stockState, optSize01, optPrice01, optSize02, optPrice02, optSize03, optPrice03, optKind01, optPrice04, optKind02, optPrice05, imgPath));
                             }
@@ -280,18 +288,18 @@ public class AddMenuMainActivity extends Fragment {
                             sideList = new ArrayList<>();
                             etcList = new ArrayList<>();
                             for (int i = 0; i < menuLists.size(); i++) {
-                                if (btnType.equals("main")) {
-                                    if (menuLists.get(i).getMenuCG().equals("메인")) {
+                                if (btnType.equals(strMain)) {
+                                    if (menuLists.get(i).getMenuCG().equals(strMain)) {
                                         mainList.add(menuLists.get(i));
                                         mainFrag = new MenuItemPageActivity(getContext(), mainList);
                                     }
-                                } else if (btnType.equals("side")) {
-                                    if (menuLists.get(i).getMenuCG().equals("사이드")) {
+                                } else if (btnType.equals(strSide)) {
+                                    if (menuLists.get(i).getMenuCG().equals(strSide)) {
                                         sideList.add(menuLists.get(i));
                                         mainFrag = new MenuItemPageActivity(getContext(), sideList);
                                     }
                                 } else {
-                                    if (menuLists.get(i).getMenuCG().equals("음료")) {
+                                    if (menuLists.get(i).getMenuCG().equals(strEtc)) {
                                         etcList.add(menuLists.get(i));
                                         mainFrag = new MenuItemPageActivity(getContext(), etcList);
                                     }

@@ -150,6 +150,7 @@
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="10dp"
                 android:background="@drawable/border_round_thin"
+                android:backgroundTint="#ffc0cb"
                 android:text="사업자번호 확인" />
 
         </LinearLayout>
@@ -222,6 +223,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:background="@drawable/border_round_thin"
+            android:backgroundTint="#ffc0cb"
             android:text="수정하기" />
 
         <Button
@@ -230,6 +232,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:background="@drawable/border_round_thin"
+            android:backgroundTint="#ffc0cb"
             android:text="탈퇴하기" />
     </LinearLayout>
 

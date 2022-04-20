@@ -6,33 +6,35 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ModeSelectActivity">
+    android:padding="15dp"
+    tools:context=".kiosk.payment.PayChoice">
+
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnAdminMode"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
+            android:id="@+id/qrBtn"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:layout_margin="20dp"
             android:background="@drawable/border_round_thin"
             android:backgroundTint="#ffc0cb"
-            android:text="관리자 모드"
-            android:textSize="35dp" />
+            android:text="QR 스캔"
+            android:textSize="20dp" />
 
         <Button
-            android:id="@+id/btnKioskMode"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
+            android:id="@+id/creditBtn"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:layout_margin="20dp"
             android:background="@drawable/border_round_thin"
             android:backgroundTint="#ffc0cb"
-            android:text="키오스크"
-            android:textSize="35dp" />
+            android:text="카드결제"
+            android:textSize="20dp" />
 
     </LinearLayout>
 

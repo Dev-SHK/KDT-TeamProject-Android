@@ -48,6 +48,9 @@ public class AddMenuPageActivity extends Fragment {
     AddMenuMainActivity mainActivity;
     static MenuList menuList;
     Boolean appendFragState = false;
+    String strMain = "메인";
+    String strSide = "사이드";
+    String strEtc = "기타";
 
     public AddMenuPageActivity(Context context, MenuList menuList) {
         this.context = context;
@@ -97,7 +100,7 @@ public class AddMenuPageActivity extends Fragment {
 
         mainActivity = new AddMenuMainActivity();
 
-        final String[] element = {"-선택-", "메인", "사이드", "음료"};
+        final String[] element = {"-선택-", strMain, strSide, strEtc};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, element);
         categorySpinner.setAdapter(adapter);
 
@@ -138,7 +141,7 @@ public class AddMenuPageActivity extends Fragment {
                     String imgPath = imgPathTxt.getText().toString();
 
 
-                    menu.put("MenuNum", menuNum);
+                    menu.put("Menu_Num", menuNum);
                     menu.put("MenuName", menuName);
                     menu.put("MenuPrice", menuPrice);
                     menu.put("MenuDetail", menuDetail);
@@ -154,7 +157,7 @@ public class AddMenuPageActivity extends Fragment {
                     menu.put("OptPrice04", optPrice04);
                     menu.put("OptKind02", optKind02);
                     menu.put("OptPrice05", optPrice05);
-                    menu.put("ImagePath", imgPath);
+                    menu.put("Img_Path", imgPath);
 
                     Log.d("Menu DB => ", menu.toString());
 
@@ -168,13 +171,13 @@ public class AddMenuPageActivity extends Fragment {
                             Toast.makeText(context, "추가완료", Toast.LENGTH_SHORT).show();
                             switch (menuCG) {
                                 case "메인":
-                                    mainActivity.selectAll("main");
+                                    mainActivity.selectAll(strMain);
                                     break;
                                 case "사이드":
-                                    mainActivity.selectAll("side");
+                                    mainActivity.selectAll(strSide);
                                     break;
-                                case "음료":
-                                    mainActivity.selectAll("음료");
+                                case "기타":
+                                    mainActivity.selectAll(strEtc);
                                     break;
                             }
                             FragmentManager childFragmentManager = getChildFragmentManager();

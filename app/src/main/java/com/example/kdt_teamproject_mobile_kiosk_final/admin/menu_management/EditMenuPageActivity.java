@@ -50,6 +50,9 @@ public class EditMenuPageActivity extends Fragment {
     Boolean modifyFragState = false;
     ImageView imageView;
     TextView imgPathTxt;
+    String strMain = "메인";
+    String strSide = "사이드";
+    String strEtc = "기타";
 
     public EditMenuPageActivity(Context context, MenuList menuList) {
         this.context = context;
@@ -61,47 +64,47 @@ public class EditMenuPageActivity extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_edit_menu_page, container, false);
-        categorySpinner = (Spinner) view.findViewById(R.id.categorySpinner);
-        modifyBtn = (Button) view.findViewById(R.id.modifyBtn);
-        deleteBtn = (Button) view.findViewById(R.id.deleteBtn);
-        upLoadBtn = (Button) view.findViewById(R.id.upLoadBtn);
-        insertMenuNum = (EditText) view.findViewById(R.id.insertMenuNum);
-        insertMenuN = (EditText) view.findViewById(R.id.insertNewMenuN);
-        insertMenuP = (EditText) view.findViewById(R.id.insertNewMenuP);
-        insertMenuD = (EditText) view.findViewById(R.id.insertNewDetail);
-        optEditSize01_1 = (EditText) view.findViewById(R.id.optEditSize01_1);
-        optEditPrice01_2 = (EditText) view.findViewById(R.id.optEditPrice01_2);
-        optEditSize02_1 = (EditText) view.findViewById(R.id.optEditSize02_1);
-        optEditPrice02_2 = (EditText) view.findViewById(R.id.optEditPrice02_2);
-        optEditSize03_1 = (EditText) view.findViewById(R.id.optEditSize03_1);
-        optEditPrice03_2 = (EditText) view.findViewById(R.id.optEditPrice03_2);
-        optEditKind04_1 = (EditText) view.findViewById(R.id.optEditKind04_1);
-        optEditPrice04_2 = (EditText) view.findViewById(R.id.optEditPrice04_2);
-        optEditKind05_1 = (EditText) view.findViewById(R.id.optEditKind05_1);
-        optEditPrice05_2 = (EditText) view.findViewById(R.id.optEditPrice05_2);
-        stateSwitch = (Switch) view.findViewById(R.id.stateSwitch);
-        optSwitch01 = (Switch) view.findViewById(R.id.optSwitch01);
-        optSwitch02 = (Switch) view.findViewById(R.id.optSwitch02);
-        optSwitch03 = (Switch) view.findViewById(R.id.optSwitch03);
-        optSwitch04 = (Switch) view.findViewById(R.id.optSwitch04);
-        optSwitch05 = (Switch) view.findViewById(R.id.optSwitch05);
-        optLayout01_01 = (LinearLayout) view.findViewById(R.id.optLayout01_01);
-        optLayout01_02 = (LinearLayout) view.findViewById(R.id.optLayout01_02);
-        optLayout02_01 = (LinearLayout) view.findViewById(R.id.optLayout02_01);
-        optLayout02_02 = (LinearLayout) view.findViewById(R.id.optLayout02_02);
-        optLayout03_01 = (LinearLayout) view.findViewById(R.id.optLayout03_01);
-        optLayout03_02 = (LinearLayout) view.findViewById(R.id.optLayout03_02);
-        optLayout04_01 = (LinearLayout) view.findViewById(R.id.optLayout04_01);
-        optLayout04_02 = (LinearLayout) view.findViewById(R.id.optLayout04_02);
-        optLayout05_01 = (LinearLayout) view.findViewById(R.id.optLayout05_01);
-        optLayout05_02 = (LinearLayout) view.findViewById(R.id.optLayout05_02);
-        imageView = (ImageView) view.findViewById(R.id.imageView);
-        imgPathTxt = (TextView) view.findViewById(R.id.imgPathTxt);
+        categorySpinner = view.findViewById(R.id.categorySpinner);
+        modifyBtn = view.findViewById(R.id.modifyBtn);
+        deleteBtn = view.findViewById(R.id.deleteBtn);
+        upLoadBtn = view.findViewById(R.id.upLoadBtn);
+        insertMenuNum = view.findViewById(R.id.insertMenuNum);
+        insertMenuN = view.findViewById(R.id.insertNewMenuN);
+        insertMenuP = view.findViewById(R.id.insertNewMenuP);
+        insertMenuD = view.findViewById(R.id.insertNewDetail);
+        optEditSize01_1 = view.findViewById(R.id.optEditSize01_1);
+        optEditPrice01_2 = view.findViewById(R.id.optEditPrice01_2);
+        optEditSize02_1 = view.findViewById(R.id.optEditSize02_1);
+        optEditPrice02_2 = view.findViewById(R.id.optEditPrice02_2);
+        optEditSize03_1 = view.findViewById(R.id.optEditSize03_1);
+        optEditPrice03_2 = view.findViewById(R.id.optEditPrice03_2);
+        optEditKind04_1 = view.findViewById(R.id.optEditKind04_1);
+        optEditPrice04_2 = view.findViewById(R.id.optEditPrice04_2);
+        optEditKind05_1 = view.findViewById(R.id.optEditKind05_1);
+        optEditPrice05_2 = view.findViewById(R.id.optEditPrice05_2);
+        stateSwitch = view.findViewById(R.id.stateSwitch);
+        optSwitch01 = view.findViewById(R.id.optSwitch01);
+        optSwitch02 = view.findViewById(R.id.optSwitch02);
+        optSwitch03 = view.findViewById(R.id.optSwitch03);
+        optSwitch04 = view.findViewById(R.id.optSwitch04);
+        optSwitch05 = view.findViewById(R.id.optSwitch05);
+        optLayout01_01 = view.findViewById(R.id.optLayout01_01);
+        optLayout01_02 = view.findViewById(R.id.optLayout01_02);
+        optLayout02_01 = view.findViewById(R.id.optLayout02_01);
+        optLayout02_02 = view.findViewById(R.id.optLayout02_02);
+        optLayout03_01 = view.findViewById(R.id.optLayout03_01);
+        optLayout03_02 = view.findViewById(R.id.optLayout03_02);
+        optLayout04_01 = view.findViewById(R.id.optLayout04_01);
+        optLayout04_02 = view.findViewById(R.id.optLayout04_02);
+        optLayout05_01 = view.findViewById(R.id.optLayout05_01);
+        optLayout05_02 = view.findViewById(R.id.optLayout05_02);
+        imageView = view.findViewById(R.id.imageView);
+        imgPathTxt = view.findViewById(R.id.imgPathTxt);
 
 
         mainActivity = new AddMenuMainActivity();
 
-        final String[] element = {"-선택-", "메인", "사이드", "음료"};
+        final String[] element = {"-선택-", strMain, strSide, strEtc};
         ArrayAdapter adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, element);
         categorySpinner.setAdapter(adapter);
 
@@ -113,7 +116,7 @@ public class EditMenuPageActivity extends Fragment {
             case "사이드":
                 selectionNum = 2;
                 break;
-            case "음료":
+            case "기타":
                 selectionNum = 3;
                 break;
         }
@@ -176,13 +179,13 @@ public class EditMenuPageActivity extends Fragment {
                         Toast.makeText(context, "삭제되었습니다.", Toast.LENGTH_SHORT).show();
                         switch (menuList.getMenuCG()) {
                             case "메인":
-                                mainActivity.selectAll("main");
+                                mainActivity.selectAll(strMain);
                                 break;
                             case "사이드":
-                                mainActivity.selectAll("side");
+                                mainActivity.selectAll(strSide);
                                 break;
-                            case "음료":
-                                mainActivity.selectAll("음료");
+                            case "기타":
+                                mainActivity.selectAll(strEtc);
                                 break;
                         }
                         AddMenuPageActivity appendFrag = new AddMenuPageActivity(context, menuList);
@@ -229,7 +232,7 @@ public class EditMenuPageActivity extends Fragment {
                     String imgPath = imgPathTxt.getText().toString();
 
 
-                    menu.put("MenuNum", menuNum);
+                    menu.put("Menu_Num", menuNum);
                     menu.put("MenuName", menuName);
                     menu.put("MenuPrice", menuPrice);
                     menu.put("MenuDetail", menuDetail);
@@ -245,7 +248,7 @@ public class EditMenuPageActivity extends Fragment {
                     menu.put("OptPrice04", optPrice04);
                     menu.put("OptKind02", optKind02);
                     menu.put("OptPrice05", optPrice05);
-                    menu.put("ImagePath", imgPath);
+                    menu.put("Img_Path", imgPath);
 
                     Log.d("Menu DB => ", menu.toString());
 
@@ -259,13 +262,13 @@ public class EditMenuPageActivity extends Fragment {
                             Toast.makeText(context, "수정완료", Toast.LENGTH_SHORT).show();
                             switch (menuCG) {
                                 case "메인":
-                                    mainActivity.selectAll("main");
+                                    mainActivity.selectAll(strMain);
                                     break;
                                 case "사이드":
-                                    mainActivity.selectAll("side");
+                                    mainActivity.selectAll(strSide);
                                     break;
-                                case "음료":
-                                    mainActivity.selectAll("음료");
+                                case "기타":
+                                    mainActivity.selectAll(strEtc);
                                     break;
                             }
                             AddMenuPageActivity appendFrag = new AddMenuPageActivity(context, menuList);
