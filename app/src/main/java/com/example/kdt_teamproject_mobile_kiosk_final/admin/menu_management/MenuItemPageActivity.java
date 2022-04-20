@@ -23,6 +23,7 @@ public class MenuItemPageActivity extends Fragment {
     MenuItemLayout menuItemLayout;
     GridLayout menuGridL;
     View view;
+    Boolean clickable = false;
 
     public MenuItemPageActivity(Context context, List<MenuList> menuLists) {
         this.context = context;
@@ -43,10 +44,9 @@ public class MenuItemPageActivity extends Fragment {
                     menuLists.get(i).getStockState(), menuLists.get(i).getOptSize01(), menuLists.get(i).getOptPrice01(), menuLists.get(i).getOptSize02(),
                     menuLists.get(i).getOptPrice02(), menuLists.get(i).getOptSize03(), menuLists.get(i).getOptPrice03(), menuLists.get(i).getOptKind01(),
                     menuLists.get(i).getOptPrice04(), menuLists.get(i).getOptKind02(), menuLists.get(i).getOptPrice05(), menuLists.get(i).getImgPath());
-            System.out.println("MenuList(Fragment) =>" + menuList);
             menuItemLayout = new MenuItemLayout(context, menuList);
-//            menuItemLayout.setGravity(Gravity.CENTER);
             menuGridL.addView(menuItemLayout);
+            menuItemLayout.setId(i);
             index = i;
             menuItemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -70,7 +70,15 @@ public class MenuItemPageActivity extends Fragment {
                     String optKind02 = menuLists.get(index).getOptKind02();
                     String optPrice05 = menuLists.get(index).getOptPrice05();
                     String imgPath = menuLists.get(index).getImgPath();
-
+                    if (menuItemLayout.getId() == index){
+                        if (!clickable) {
+                            menuItemLayout.setBackgroundResource(R.drawable.itembutton_t);
+                            clickable = true;
+                        } else {
+                            menuItemLayout.setBackgroundResource(R.drawable.itembutton_f);
+                            clickable = false;
+                        }
+                    }
                     menuList = new MenuList(menuNum, menuName, menuPrice, menuDetail, menuCG, stockState, optSize01, optPrice01,
                             optSize02, optPrice02, optSize03, optPrice03, optKind01, optPrice04, optKind02, optPrice05, imgPath);
                     mainActivity.SelectItemGet(menuList);

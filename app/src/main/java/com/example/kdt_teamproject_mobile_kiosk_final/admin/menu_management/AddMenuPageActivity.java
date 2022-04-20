@@ -48,6 +48,9 @@ public class AddMenuPageActivity extends Fragment {
     AddMenuMainActivity mainActivity;
     static MenuList menuList;
     Boolean appendFragState = false;
+    String strMain = "메인";
+    String strSide = "사이드";
+    String strEtc = "기타";
 
     public AddMenuPageActivity(Context context, MenuList menuList) {
         this.context = context;
@@ -97,7 +100,7 @@ public class AddMenuPageActivity extends Fragment {
 
         mainActivity = new AddMenuMainActivity();
 
-        final String[] element = {"-선택-", "메인", "사이드", "음료"};
+        final String[] element = {"-선택-", strMain, strSide, strEtc};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, element);
         categorySpinner.setAdapter(adapter);
 
@@ -105,6 +108,7 @@ public class AddMenuPageActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 appendFragState = true;
+                mainActivity.checkSelfPermission();
                 mainActivity.selectGallery();
 
             }
@@ -114,69 +118,73 @@ public class AddMenuPageActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Map<String, Object> menu = new HashMap<>();
+                if (insertMenuNum.getText().toString().equals("") | insertMenuN.getText().toString().equals("") |
+                        insertMenuP.getText().toString().equals("") | categorySpinner.getSelectedItem().toString().equals("-선택-")) {
+                    Toast.makeText(context, "필수항목을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                } else {
+                    String menuNum = insertMenuNum.getText().toString();
+                    String menuName = insertMenuN.getText().toString();
+                    String menuPrice = insertMenuP.getText().toString();
+                    String menuDetail = insertMenuD.getText().toString();
+                    String menuCG = categorySpinner.getSelectedItem().toString();
+                    Boolean stockState = stateSwitch.isChecked();
+                    String optSize01 = optEditSize01_1.getText().toString();
+                    String optPrice01 = optEditPrice01_2.getText().toString();
+                    String optSize02 = optEditSize02_1.getText().toString();
+                    String optPrice02 = optEditPrice02_2.getText().toString();
+                    String optSize03 = optEditSize03_1.getText().toString();
+                    String optPrice03 = optEditPrice03_2.getText().toString();
+                    String optKind01 = optEditKind04_1.getText().toString();
+                    String optPrice04 = optEditPrice04_2.getText().toString();
+                    String optKind02 = optEditKind05_1.getText().toString();
+                    String optPrice05 = optEditPrice05_2.getText().toString();
+                    String imgPath = imgPathTxt.getText().toString();
 
-                String menuNum = insertMenuNum.getText().toString();
-                String menuName = insertMenuN.getText().toString();
-                String menuPrice = insertMenuP.getText().toString();
-                String menuDetail = insertMenuD.getText().toString();
-                String menuCG = categorySpinner.getSelectedItem().toString();
-                Boolean stockState = stateSwitch.isChecked();
-                String optSize01 = optEditSize01_1.getText().toString();
-                String optPrice01 = optEditPrice01_2.getText().toString();
-                String optSize02 = optEditSize02_1.getText().toString();
-                String optPrice02 = optEditPrice02_2.getText().toString();
-                String optSize03 = optEditSize03_1.getText().toString();
-                String optPrice03 = optEditPrice03_2.getText().toString();
-                String optKind01 = optEditKind04_1.getText().toString();
-                String optPrice04 = optEditPrice04_2.getText().toString();
-                String optKind02 = optEditKind05_1.getText().toString();
-                String optPrice05 = optEditPrice05_2.getText().toString();
-                String imgPath = imgPathTxt.getText().toString();
 
+                    menu.put("Menu_Num", menuNum);
+                    menu.put("MenuName", menuName);
+                    menu.put("MenuPrice", menuPrice);
+                    menu.put("MenuDetail", menuDetail);
+                    menu.put("MenuCG", menuCG);
+                    menu.put("StockState", stockState);
+                    menu.put("OptSize01", optSize01);
+                    menu.put("OptPrice01", optPrice01);
+                    menu.put("OptSize02", optSize02);
+                    menu.put("OptPrice02", optPrice02);
+                    menu.put("OptSize03", optSize03);
+                    menu.put("OptPrice03", optPrice03);
+                    menu.put("OptKind01", optKind01);
+                    menu.put("OptPrice04", optPrice04);
+                    menu.put("OptKind02", optKind02);
+                    menu.put("OptPrice05", optPrice05);
+                    menu.put("Img_Path", imgPath);
 
-                menu.put("MenuNum", menuNum);
-                menu.put("MenuName", menuName);
-                menu.put("MenuPrice", menuPrice);
-                menu.put("MenuDetail", menuDetail);
-                menu.put("MenuCG", menuCG);
-                menu.put("StockState", stockState);
-                menu.put("OptSize01", optSize01);
-                menu.put("OptPrice01", optPrice01);
-                menu.put("OptSize02", optSize02);
-                menu.put("OptPrice02", optPrice02);
-                menu.put("OptSize03", optSize03);
-                menu.put("OptPrice03", optPrice03);
-                menu.put("OptKind01", optKind01);
-                menu.put("OptPrice04", optPrice04);
-                menu.put("OptKind02", optKind02);
-                menu.put("OptPrice05", optPrice05);
-                menu.put("ImagePath", imgPath);
+                    Log.d("Menu DB => ", menu.toString());
 
-                Log.d("Menu DB => ", menu.toString());
+                    EnterpriseUserAccount userAccount = LoginActivity.userAccount;
+                    String emailId = userAccount.getEpEmailID();
 
-                EnterpriseUserAccount userAccount = LoginActivity.userAccount;
-                String emailId = userAccount.getEpEmailID();
-
-                firestore.collection("Enterprise_Users").document(emailId)
-                        .collection("MenuList").document(menuNum).set(menu).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(context, "추가완료", Toast.LENGTH_SHORT).show();
-                        switch (menuCG) {
-                            case "메인":
-                                mainActivity.selectAll("main");
-                                break;
-                            case "사이드":
-                                mainActivity.selectAll("side");
-                                break;
-                            case "음료":
-                                mainActivity.selectAll("음료");
-                                break;
+                    firestore.collection("Enterprise_Users").document(emailId)
+                            .collection("MenuList").document(menuNum).set(menu).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(context, "추가완료", Toast.LENGTH_SHORT).show();
+                            switch (menuCG) {
+                                case "메인":
+                                    mainActivity.selectAll(strMain);
+                                    break;
+                                case "사이드":
+                                    mainActivity.selectAll(strSide);
+                                    break;
+                                case "기타":
+                                    mainActivity.selectAll(strEtc);
+                                    break;
+                            }
+                            FragmentManager childFragmentManager = getChildFragmentManager();
+                            childFragmentManager.popBackStack();
                         }
-                        FragmentManager childFragmentManager = getChildFragmentManager();
-                        childFragmentManager.popBackStack();
-                    }
-                });
+                    });
+                }
             }
         });
         optSwitch01.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

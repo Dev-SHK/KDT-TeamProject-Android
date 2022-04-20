@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.kdt_teamproject_mobile_kiosk_final.admin.AdminMenuActivity;
+import com.example.kdt_teamproject_mobile_kiosk_final.kiosk.KioskMainActivity;
 
 public class ModeSelectActivity extends AppCompatActivity {
 
@@ -34,6 +35,9 @@ public class ModeSelectActivity extends AppCompatActivity {
         btnKioskMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(ModeSelectActivity.this, KioskMainActivity.class);
+                startActivity(intent);
+                Toast.makeText(ModeSelectActivity.this, "키오스크 모드로 이동합니다", Toast.LENGTH_SHORT).show();
 
             }
         });

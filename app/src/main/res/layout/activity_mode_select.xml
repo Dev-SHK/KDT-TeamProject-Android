@@ -19,7 +19,8 @@
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:layout_margin="20dp"
-            android:background="@drawable/border_round"
+            android:background="@drawable/border_round_thin"
+            android:backgroundTint="#ffc0cb"
             android:text="관리자 모드"
             android:textSize="35dp" />
 
@@ -28,7 +29,8 @@
             android:layout_width="300dp"
             android:layout_height="200dp"
             android:layout_margin="20dp"
-            android:background="@drawable/border_round"
+            android:background="@drawable/border_round_thin"
+            android:backgroundTint="#ffc0cb"
             android:text="키오스크"
             android:textSize="35dp" />
 

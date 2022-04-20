@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.kdt_teamproject_mobile_kiosk_final">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -10,14 +14,38 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KDT_TeamProject_Mobile_Kiosk_Final">
         <activity
-            android:name=".admin.menu_management.EditMenuPageActivity"
+            android:name=".admin.orderList.OrderList_BaseAdapter"
             android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".kiosk.payment.QrScan"
+            android:exported="false" />
+        <activity
+            android:name=".kiosk.KioskMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.orderList.OrderListActivity"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".admin.menu_management.EditMenuPageActivity"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".admin.menu_management.AddMenuMainActivity"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".admin.menu_management.AddMenuPageActivity"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".admin.AdminMenuActivity"
             android:exported="false" />
@@ -26,7 +54,8 @@
             android:exported="false" />
         <activity
             android:name=".admin.EditAccountActivity"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
