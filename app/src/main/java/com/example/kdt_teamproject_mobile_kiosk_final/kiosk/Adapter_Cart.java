@@ -21,8 +21,7 @@ public class Adapter_Cart extends BaseAdapter {
     LayoutInflater mLayoutInflater = null;
     DTO_Cart_Upload data = null;
 
-    public Adapter_Cart(Context context)
-    {
+    public Adapter_Cart(Context context) {
         mContext = context;
         mData = new ArrayList<>();
         mLayoutInflater = LayoutInflater.from(mContext);
@@ -83,8 +82,8 @@ public class Adapter_Cart extends BaseAdapter {
         viewHolder.mBtn_X.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int newPrice = (int) (((KioskMainActivity)mContext).sum - mData.get(position).getTotalPrice());
-                ((KioskMainActivity)mContext).sum = newPrice;
+                int newPrice = (int) (((KioskMainActivity) mContext).sum - mData.get(position).getTotalPrice());
+                ((KioskMainActivity) mContext).sum = newPrice;
                 Dialog_menu.setTotalPrice(newPrice);
                 delete(position);
             }
@@ -94,7 +93,7 @@ public class Adapter_Cart extends BaseAdapter {
     }
 
     // 장바구니 담기(추가)
-    public void add (int index, DTO_Cart_Upload dto02) {
+    public void add(int index, DTO_Cart_Upload dto02) {
         this.data = dto02;
         mData.add(dto02);
         notifyDataSetChanged();

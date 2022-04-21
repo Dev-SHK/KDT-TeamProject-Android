@@ -9,68 +9,69 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/test_left_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_weight="1"
+            android:orientation="vertical"
+            android:textColor="@color/black"
             android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="@color/black">
-        </TextView>
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/test_left_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_weight="1"
             android:gravity="left|center"
-            android:layout_weight="1">
-        </TextView>
+            android:orientation="vertical" />
+
         <TextView
             android:id="@+id/test_left_opts"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_weight="1"
             android:gravity="left|center"
-            android:layout_weight="1">
-        </TextView>
+            android:orientation="vertical" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/test_cart_center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1.5">
+        android:layout_weight="1.5"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/test_cart_price"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="20dp"
-            android:textColor="@color/black">
-        </TextView>
+            android:textColor="@color/black"
+            android:textSize="20dp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/test_cart_right"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1.5">
-        <Button
+        android:layout_weight="1.5"
+        android:orientation="vertical">
+
+        <android.widget.Button
             android:id="@+id/cancel_button_cart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:onClick="onClick"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp">
-        </Button>
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="#ffc0cb"
+            android:onClick="onClick" />
     </LinearLayout>
 
 </LinearLayout>

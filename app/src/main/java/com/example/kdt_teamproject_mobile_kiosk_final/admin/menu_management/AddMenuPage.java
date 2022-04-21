@@ -1,11 +1,18 @@
 package com.example.kdt_teamproject_mobile_kiosk_final.admin.menu_management;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kdt_teamproject_mobile_kiosk_final.R;
+import com.example.kdt_teamproject_mobile_kiosk_final.admin.AdminMenuActivity;
 import com.example.kdt_teamproject_mobile_kiosk_final.admin.LoginActivity;
 import com.example.kdt_teamproject_mobile_kiosk_final.model.EnterpriseUserAccount;
 import com.example.kdt_teamproject_mobile_kiosk_final.model.MenuList;
@@ -31,7 +39,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddMenuPageActivity extends Fragment {
+public class AddMenuPage extends Fragment {
 
     Spinner categorySpinner;
     Context context;
@@ -45,19 +53,21 @@ public class AddMenuPageActivity extends Fragment {
             optLayout04_02, optLayout05_01, optLayout05_02;
     View view;
     ImageView imageView;
-    AddMenuMainActivity mainActivity;
+    AddMenuMain mainActivity;
     static MenuList menuList;
     Boolean appendFragState = false;
     String strMain = "메인";
     String strSide = "사이드";
     String strEtc = "기타";
+    AdminMenuActivity menuActivity;
+    private final int GALLERY_CODE = 1112;
 
-    public AddMenuPageActivity(Context context, MenuList menuList) {
+    public AddMenuPage(Context context, MenuList menuList) {
         this.context = context;
         this.menuList = menuList;
     }
 
-    public AddMenuPageActivity() {
+    public AddMenuPage() {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -98,7 +108,8 @@ public class AddMenuPageActivity extends Fragment {
         optLayout05_02 = view.findViewById(R.id.optLayout05_02);
         imageView = view.findViewById(R.id.imageView);
 
-        mainActivity = new AddMenuMainActivity();
+        mainActivity = new AddMenuMain();
+        menuActivity = new AdminMenuActivity();
 
         final String[] element = {"-선택-", strMain, strSide, strEtc};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, element);
@@ -108,8 +119,33 @@ public class AddMenuPageActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 appendFragState = true;
-                mainActivity.checkSelfPermission();
-                mainActivity.selectGallery();
+//                menuActivity.checkSelfPermission();
+                String temp = "";
+
+                // 파일 읽기 권한 확인
+                if (ContextCompat.checkSelfPermission(getContext(),
+                        Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    temp += Manifest.permission.READ_EXTERNAL_STORAGE + " ";
+                }
+
+                // 파일 쓰기 권한 확인
+                if (ContextCompat.checkSelfPermission(getContext(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    temp += Manifest.permission.WRITE_EXTERNAL_STORAGE + " ";
+                }
+
+                if (!TextUtils.isEmpty(temp)) {
+                    //권한 요청
+                    ActivityCompat.requestPermissions(getActivity(), temp.trim().split(" "), 1);
+                } else {
+                    //모두 허용 상태
+                    Toast.makeText(getContext(), "권한을 모두 허용합니다.", Toast.LENGTH_SHORT).show();
+                }
+//                mainActivity.selectGallery();
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Images.Media.CONTENT_TYPE);
+                intent.setType("image/*");
+                startActivityForResult(intent, GALLERY_CODE);
 
             }
         });
@@ -118,29 +154,31 @@ public class AddMenuPageActivity extends Fragment {
             @Override
             public void onClick(View view) {
                 Map<String, Object> menu = new HashMap<>();
+                String menuNum = insertMenuNum.getText().toString();
+                String menuName = insertMenuN.getText().toString();
+                String menuPrice = insertMenuP.getText().toString();
+                String menuDetail = insertMenuD.getText().toString();
+                String menuCG = categorySpinner.getSelectedItem().toString();
+                Boolean stockState = stateSwitch.isChecked();
+                String optSize01 = optEditSize01_1.getText().toString();
+                String optPrice01 = optEditPrice01_2.getText().toString();
+                String optSize02 = optEditSize02_1.getText().toString();
+                String optPrice02 = optEditPrice02_2.getText().toString();
+                String optSize03 = optEditSize03_1.getText().toString();
+                String optPrice03 = optEditPrice03_2.getText().toString();
+                String optKind01 = optEditKind04_1.getText().toString();
+                String optPrice04 = optEditPrice04_2.getText().toString();
+                String optKind02 = optEditKind05_1.getText().toString();
+                String optPrice05 = optEditPrice05_2.getText().toString();
+                String imgPath = imgPathTxt.getText().toString();
+
                 if (insertMenuNum.getText().toString().equals("") | insertMenuN.getText().toString().equals("") |
                         insertMenuP.getText().toString().equals("") | categorySpinner.getSelectedItem().toString().equals("-선택-")) {
                     Toast.makeText(context, "필수항목을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                } else if (optSize01.equals("") | optPrice01.equals("") | optSize02.equals("") | optPrice02.equals("") | optSize03.equals("") |
+                        optPrice03.equals("") | optKind01.equals("") | optPrice04.equals("") | optKind02.equals("") | optPrice05.equals("")) {
+                    Toast.makeText(context, "옵션항목을 입력해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
-                    String menuNum = insertMenuNum.getText().toString();
-                    String menuName = insertMenuN.getText().toString();
-                    String menuPrice = insertMenuP.getText().toString();
-                    String menuDetail = insertMenuD.getText().toString();
-                    String menuCG = categorySpinner.getSelectedItem().toString();
-                    Boolean stockState = stateSwitch.isChecked();
-                    String optSize01 = optEditSize01_1.getText().toString();
-                    String optPrice01 = optEditPrice01_2.getText().toString();
-                    String optSize02 = optEditSize02_1.getText().toString();
-                    String optPrice02 = optEditPrice02_2.getText().toString();
-                    String optSize03 = optEditSize03_1.getText().toString();
-                    String optPrice03 = optEditPrice03_2.getText().toString();
-                    String optKind01 = optEditKind04_1.getText().toString();
-                    String optPrice04 = optEditPrice04_2.getText().toString();
-                    String optKind02 = optEditKind05_1.getText().toString();
-                    String optPrice05 = optEditPrice05_2.getText().toString();
-                    String imgPath = imgPathTxt.getText().toString();
-
-
                     menu.put("Menu_Num", menuNum);
                     menu.put("MenuName", menuName);
                     menu.put("MenuPrice", menuPrice);

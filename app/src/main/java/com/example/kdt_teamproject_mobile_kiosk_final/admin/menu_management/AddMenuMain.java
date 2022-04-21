@@ -2,21 +2,14 @@ package com.example.kdt_teamproject_mobile_kiosk_final.admin.menu_management;
 
 import static android.app.Activity.RESULT_OK;
 
-import androidx.activity.result.ActivityResultCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,16 +18,13 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.kdt_teamproject_mobile_kiosk_final.R;
-import com.example.kdt_teamproject_mobile_kiosk_final.admin.AdminMenuActivity;
 import com.example.kdt_teamproject_mobile_kiosk_final.admin.LoginActivity;
 import com.example.kdt_teamproject_mobile_kiosk_final.model.EnterpriseUserAccount;
 import com.example.kdt_teamproject_mobile_kiosk_final.model.MenuList;
@@ -48,21 +38,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddMenuMainActivity extends Fragment {
+public class AddMenuMain extends Fragment {
 
     Button mainBtn, sideBtn, etcBtn, insertBtn, modifyPageBtn;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     List<MenuList> mainList;
     List<MenuList> sideList;
     List<MenuList> etcList;
-    MenuItemPageActivity mainFrag;
+    MenuItemPage mainFrag;
     static MenuList menuList;
-    private final int GALLERY_CODE = 1112;
     static String imgPath;
     String strMain = "메인";
     String strSide = "사이드";
     String strEtc = "기타";
-    Context mContext;
 
     @Nullable
     @Override
@@ -77,14 +65,14 @@ public class AddMenuMainActivity extends Fragment {
         modifyPageBtn = v.findViewById(R.id.modifyPageBtn);
 
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        AddMenuPageActivity appendFrag = new AddMenuPageActivity(getContext(), menuList);
+        AddMenuPage appendFrag = new AddMenuPage(getContext(), menuList);
         transaction.replace(R.id.fragmentBoard02, appendFrag);
         transaction.commitAllowingStateLoss();
 
         insertBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddMenuPageActivity appendFrag = new AddMenuPageActivity(getContext(), menuList);
+                AddMenuPage appendFrag = new AddMenuPage(getContext(), menuList);
                 RViewChange(appendFrag, null);
             }
         });
@@ -92,7 +80,7 @@ public class AddMenuMainActivity extends Fragment {
         modifyPageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditMenuPageActivity modifyFrag = new EditMenuPageActivity(getContext(), menuList);
+                EditMenuPage modifyFrag = new EditMenuPage(getContext(), menuList);
                 RViewChange(null, modifyFrag);
             }
         });
@@ -123,12 +111,12 @@ public class AddMenuMainActivity extends Fragment {
         return v;
     }
 
-    public void selectGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Images.Media.CONTENT_TYPE);
-        intent.setType("image/*");
-        startActivityForResult(intent, GALLERY_CODE);
-    }
+//    public void selectGallery() {
+//        Intent intent = new Intent(Intent.ACTION_PICK);
+//        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Images.Media.CONTENT_TYPE);
+//        intent.setType("image/*");
+//        startActivityForResult(intent, GALLERY_CODE);
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -152,7 +140,7 @@ public class AddMenuMainActivity extends Fragment {
         Bitmap bitmap = BitmapFactory.decodeFile(imgPath);//경로를 통해 비트맵으로 전환
         try {
             if (getChildFragmentManager().findFragmentById(R.id.fragmentBoard02) != null) {
-                AddMenuPageActivity appendFrag = (AddMenuPageActivity) getChildFragmentManager().findFragmentById(R.id.fragmentBoard02);
+                AddMenuPage appendFrag = (AddMenuPage) getChildFragmentManager().findFragmentById(R.id.fragmentBoard02);
                 appendFrag.changeAppendFragImg(bitmap, exifDegree);
                 appendFrag.changeAppendFragImgText(imgPath);
                 appendFrag.appendFragState = false;
@@ -162,56 +150,13 @@ public class AddMenuMainActivity extends Fragment {
         }
         try {
             if (getChildFragmentManager().findFragmentById(R.id.fragmentBoard02) != null) {
-                EditMenuPageActivity modifyFrag = (EditMenuPageActivity) getChildFragmentManager().findFragmentById(R.id.fragmentBoard02);
+                EditMenuPage modifyFrag = (EditMenuPage) getChildFragmentManager().findFragmentById(R.id.fragmentBoard02);
                 modifyFrag.changeModifyFragImg(bitmap, exifDegree);
                 modifyFrag.changeModifyFragImgText(imgPath);
                 modifyFrag.modifyFragState = false;
             }
         } catch (ClassCastException c) {
             c.printStackTrace();
-        }
-    }
-
-    //권한에 대한 응답이 있을때 작동하는 함수
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        //권한을 허용 했을 경우
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1) {
-            int length = permissions.length;
-            for (int i = 0; i < length; i++) {
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    // 동의
-                    Log.d("MainActivity", "권한 허용 : " + permissions[i]);
-                }
-            }
-        }
-    }
-
-    public void checkSelfPermission() {
-        String temp = "";
-        final int RESULT_CODE = 1;
-        mContext = getContext();
-
-        // 파일 읽기 권한 확인
-        if (mContext != null && ContextCompat.checkSelfPermission(mContext,
-                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            temp += Manifest.permission.READ_EXTERNAL_STORAGE + " ";
-        }
-
-
-        // 파일 쓰기 권한 확인
-        if (ActivityCompat.checkSelfPermission(mContext,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            temp += Manifest.permission.WRITE_EXTERNAL_STORAGE + " ";
-        }
-
-        if (!TextUtils.isEmpty(temp)) {
-            //권한 요청
-            requestPermissions(temp.trim().split(" "), 1);
-        } else {
-            //모두 허용 상태
-            Toast.makeText(getContext(), "권한을 모두 허용합니다.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -254,8 +199,6 @@ public class AddMenuMainActivity extends Fragment {
         EnterpriseUserAccount userAccount = LoginActivity.userAccount;
         String emailId = userAccount.getEpEmailID();
 
-//        FragmentManager childFragment = getChildFragmentManager();
-
         firestore.collection("Enterprise_Users").document(emailId).collection("MenuList")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -291,17 +234,17 @@ public class AddMenuMainActivity extends Fragment {
                                 if (btnType.equals(strMain)) {
                                     if (menuLists.get(i).getMenuCG().equals(strMain)) {
                                         mainList.add(menuLists.get(i));
-                                        mainFrag = new MenuItemPageActivity(getContext(), mainList);
+                                        mainFrag = new MenuItemPage(getContext(), mainList);
                                     }
                                 } else if (btnType.equals(strSide)) {
                                     if (menuLists.get(i).getMenuCG().equals(strSide)) {
                                         sideList.add(menuLists.get(i));
-                                        mainFrag = new MenuItemPageActivity(getContext(), sideList);
+                                        mainFrag = new MenuItemPage(getContext(), sideList);
                                     }
                                 } else {
                                     if (menuLists.get(i).getMenuCG().equals(strEtc)) {
                                         etcList.add(menuLists.get(i));
-                                        mainFrag = new MenuItemPageActivity(getContext(), etcList);
+                                        mainFrag = new MenuItemPage(getContext(), etcList);
                                     }
                                 }
                             }
@@ -324,7 +267,7 @@ public class AddMenuMainActivity extends Fragment {
                 dto.getOptPrice01(), dto.getOptSize02(), dto.getOptPrice02(), dto.getOptSize03(), dto.getOptPrice03(), dto.getOptKind01(), dto.getOptPrice04(), dto.getOptKind02(), dto.getOptPrice05(), dto.getImgPath());
     }
 
-    public void RViewChange(AddMenuPageActivity appendFrag, EditMenuPageActivity modifyFrag) {
+    public void RViewChange(AddMenuPage appendFrag, EditMenuPage modifyFrag) {
         if (!isAdded()) return;
         if (appendFrag == null) {
             FragmentTransaction transaction = getChildFragmentManager().beginTransaction();

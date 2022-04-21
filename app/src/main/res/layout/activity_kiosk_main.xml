@@ -17,7 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="10"
+            android:layout_weight="7"
             android:background="@drawable/btn_default"
             android:orientation="vertical">
 
@@ -27,35 +27,45 @@
                 android:layout_height="match_parent">
 
                 <!--왼쪽 상단 사이드 버튼 -->
-                <Button
+                <android.widget.Button
                     android:id="@+id/leftTopSide"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
                     android:background="@drawable/btn_default"
-                    android:text="사이드"/>
+                    android:text="사이드"
+                    android:textSize="30dp"/>
 
                 <!--왼쪽 상단 메인 버튼 -->
-                <Button
+                <android.widget.Button
                     android:id="@+id/leftTopMain"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/leftTopSide"
                     android:layout_toLeftOf="@+id/leftTopSide"
-                    android:background="@drawable/btn_default"
-                    android:text="메인" />
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="메인"
+                    android:background="@drawable/btn_dialog_selected"
+                    android:textColor="@color/white"
+                    android:textSize="30dp" />
 
                 <!--왼쪽 상단 음료 버튼 -->
-                <Button
+                <android.widget.Button
                     android:id="@+id/leftTopEtc"
-                    android:layout_width="wrap_content"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/leftTopSide"
                     android:layout_toRightOf="@+id/leftTopSide"
                     android:background="@drawable/btn_default"
-                    android:text="기타" />
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="기타"
+                    android:textSize="30dp" />
             </RelativeLayout>
         </LinearLayout>
 
@@ -65,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/btn_default"/>
+            android:background="@drawable/btn_default" />
     </LinearLayout>
 
     <!--오른쪽 큰 화면 -->
@@ -79,14 +89,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="10">
+            android:layout_weight="8.55">
 
             <!-- 오른쪽 상단 주문내역 뷰 -->
             <RelativeLayout
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/btn_default">
+                android:background="@drawable/btn_default"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -119,13 +129,31 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:background="@drawable/btn_default">
 
                 <ListView
                     android:id="@+id/orderListLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/empty_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvEmpty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="목록이 비었습니다."
+                    android:textSize="15dp"
+                    android:visibility="gone" />
+
             </LinearLayout>
             <!--                </ScrollView>-->
 
@@ -133,7 +161,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="7"
+                android:layout_weight="9"
                 android:background="@drawable/btn_default"
                 android:gravity="right"
                 android:orientation="vertical">
@@ -141,7 +169,9 @@
                 <TextView
                     android:id="@+id/totalPrice"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:gravity="center|right"
+                    android:paddingRight="10dp"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -149,14 +179,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="10"
+            android:layout_weight="9"
             android:background="@drawable/btn_default"
             android:gravity="center">
 
             <!-- 오른쪽 하단 취소 버튼 -->
 
             <!-- 오른쪽 하단 주문하기 버튼 -->
-            <Button
+            <android.widget.Button
                 android:id="@+id/btn_clear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -164,9 +194,11 @@
                 android:layout_weight="7"
                 android:background="@drawable/btn_default"
                 android:onClick="onClick"
+                android:textStyle="bold"
+                android:textSize="25dp"
                 android:text="취소" />
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/orderBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -174,7 +206,9 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="3"
                 android:background="@drawable/btn_default"
-                android:text="주문하기" />
+                android:text="주문하기"
+                android:textStyle="bold"
+                android:textSize="25dp"/>
         </LinearLayout>
 
     </LinearLayout>

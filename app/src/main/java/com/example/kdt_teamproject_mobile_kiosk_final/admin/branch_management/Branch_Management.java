@@ -141,6 +141,7 @@ public class Branch_Management extends Fragment implements OnMapReadyCallback {
                         firestore.collection("Enterprise_Users").document(emailId).collection("Store").document(mData.get(position).getStoreName()).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
+                                selectAll();
                                 Toast.makeText(getContext(), "정보가 삭제되었어요", Toast.LENGTH_SHORT).show();
                             }
                         });

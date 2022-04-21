@@ -34,9 +34,7 @@ public class DTO_Cart_Download {
     // 다이얼 로그 박스 생성자
     public DTO_Cart_Download(String menuName, String menuPrice, String menuDetail, String optKind01, String optKind02,
                              String optPrice01, String optPrice02, String optPrice03, String optPrice04, String optPrice05,
-                             String optSize01, String optSize02, String optSize03)
-
-    {
+                             String optSize01, String optSize02, String optSize03) {
         this.menuName = menuName;
         this.menuPrice = menuPrice;
         this.menuDetail = menuDetail;
@@ -56,8 +54,7 @@ public class DTO_Cart_Download {
     public DTO_Cart_Download(String menuNum, String menuCG, String imgPath, String menuName,
                              String menuPrice, String menuDetail, String optKind01, String optKind02,
                              String optPrice01, String optPrice02, String optPrice03, String optPrice04, String optPrice05,
-                             String optSize01, String optSize02, String optSize03, Boolean stockState)
-    {
+                             String optSize01, String optSize02, String optSize03, Boolean stockState) {
         this.menuNum = menuNum;
         this.menuCG = menuCG;
         this.imgPath = imgPath;

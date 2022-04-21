@@ -13,9 +13,9 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:background="@drawable/border_top"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:background="@drawable/border_top">
 
             <TextView
                 android:id="@+id/pageName"
@@ -24,8 +24,8 @@
                 android:background="@drawable/border_top"
                 android:gravity="center"
                 android:text="메뉴 추가"
-                android:textSize="28dp"
-                android:textStyle="bold"></TextView>
+                android:textSize="25dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -143,7 +143,7 @@
 
                         <Spinner
                             android:id="@+id/categorySpinner"
-                            android:layout_width="160dp"
+                            android:layout_width="110dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:spinnerMode="dropdown"
@@ -182,14 +182,14 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <Button
+                        <android.widget.Button
                             android:id="@+id/upLoadBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/border_round_thin"
-                            android:backgroundTint="#ffc0cb"
                             android:layout_margin="5dp"
                             android:layout_weight="1"
+                            android:background="@drawable/border_round_thin"
+                            android:backgroundTint="#ffc0cb"
                             android:text="이미지파일 업로드" />
                     </LinearLayout>
 
@@ -481,13 +481,12 @@
             </androidx.core.widget.NestedScrollView>
         </LinearLayout>
 
-        <Button
+        <android.widget.Button
             android:id="@+id/appendBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
-            android:background="@drawable/border_round_thin"
-            android:backgroundTint="#ffc0cb"
+            android:background="@drawable/border_round"
             android:text="추가하기"
             android:textSize="25dp"
             android:textStyle="bold" />
