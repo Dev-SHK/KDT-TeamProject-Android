@@ -1,8 +1,6 @@
 package com.example.kdt_teamproject_mobile_kiosk_final.admin.menu_management;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -24,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kdt_teamproject_mobile_kiosk_final.R;
+import com.example.kdt_teamproject_mobile_kiosk_final.admin.AdminMenuActivity;
 import com.example.kdt_teamproject_mobile_kiosk_final.admin.LoginActivity;
 import com.example.kdt_teamproject_mobile_kiosk_final.model.EnterpriseUserAccount;
 import com.example.kdt_teamproject_mobile_kiosk_final.model.MenuList;
@@ -33,7 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditMenuPageActivity extends Fragment {
+public class EditMenuPage extends Fragment {
 
     Spinner categorySpinner;
     Context context;
@@ -45,7 +44,7 @@ public class EditMenuPageActivity extends Fragment {
     LinearLayout optLayout01_01, optLayout01_02, optLayout02_01, optLayout02_02, optLayout03_01, optLayout03_02, optLayout04_01,
             optLayout04_02, optLayout05_01, optLayout05_02;
     View view;
-    AddMenuMainActivity mainActivity;
+    AddMenuMain mainActivity;
     MenuList menuList;
     Boolean modifyFragState = false;
     ImageView imageView;
@@ -53,13 +52,14 @@ public class EditMenuPageActivity extends Fragment {
     String strMain = "메인";
     String strSide = "사이드";
     String strEtc = "기타";
+    AdminMenuActivity menuActivity;
 
-    public EditMenuPageActivity(Context context, MenuList menuList) {
+    public EditMenuPage(Context context, MenuList menuList) {
         this.context = context;
         this.menuList = menuList;
     }
 
-    public EditMenuPageActivity() {
+    public EditMenuPage() {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -102,7 +102,8 @@ public class EditMenuPageActivity extends Fragment {
         imgPathTxt = view.findViewById(R.id.imgPathTxt);
 
 
-        mainActivity = new AddMenuMainActivity();
+        mainActivity = new AddMenuMain();
+        menuActivity = new AdminMenuActivity();
 
         final String[] element = {"-선택-", strMain, strSide, strEtc};
         ArrayAdapter adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, element);
@@ -188,7 +189,7 @@ public class EditMenuPageActivity extends Fragment {
                                 mainActivity.selectAll(strEtc);
                                 break;
                         }
-                        AddMenuPageActivity appendFrag = new AddMenuPageActivity(context, menuList);
+                        AddMenuPage appendFrag = new AddMenuPage(context, menuList);
                         mainActivity.RViewChange(appendFrag, null);
                     }
                 });
@@ -199,8 +200,8 @@ public class EditMenuPageActivity extends Fragment {
             @Override
             public void onClick(View v) {
                 modifyFragState = true;
-                mainActivity.checkSelfPermission();
-                mainActivity.selectGallery();
+//                menuActivity.checkSelfPermission();
+//                mainActivity.selectGallery();
             }
         });
 
@@ -271,7 +272,7 @@ public class EditMenuPageActivity extends Fragment {
                                     mainActivity.selectAll(strEtc);
                                     break;
                             }
-                            AddMenuPageActivity appendFrag = new AddMenuPageActivity(context, menuList);
+                            AddMenuPage appendFrag = new AddMenuPage(context, menuList);
                             mainActivity.RViewChange(appendFrag, null);
                         }
                     });

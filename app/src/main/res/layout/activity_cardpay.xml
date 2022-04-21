@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".kiosk.payment.CardPay">
 
 
@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="25dp"
-        android:background="@drawable/black"/>
+        android:background="@drawable/black" />
 
     <TextView
         android:id="@+id/textView"
@@ -23,5 +23,5 @@
         android:layout_marginTop="25dp"
         android:text="카드를 투입 해주세요"
         android:textSize="50dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 </LinearLayout>

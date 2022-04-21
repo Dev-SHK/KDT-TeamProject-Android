@@ -19,6 +19,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +31,8 @@ public class RegisterActivity extends AppCompatActivity {
     Button btnRegister, btnEpRegisterNumAuth;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
-    String strEmail, strPwd, strConfirmPwd, strUserName, strEpName, strPhoneNum, strAddress, strBirthday, strEpRegiNum, strPostNum, strStartDate;
+    String strEmail, strPwd, strConfirmPwd, strUserName, strEpName, strPhoneNum, strAddress, strBirthday, strEpRegiNum, strPostNum, strStartDate, regiNum;
+    EnterpriseUserAccount account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +59,31 @@ public class RegisterActivity extends AppCompatActivity {
 
         btnRegister = findViewById(R.id.btnRegister);
         btnEpRegisterNumAuth = findViewById(R.id.btnEpRegisterNumAuth);
+        account = new EnterpriseUserAccount();
 
         btnEpRegisterNumAuth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                firestore.collection("Enterprise_Register_Number").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            if (edtTxtEpRegiNum.getText().toString().equals("")) {
+                                Toast.makeText(getApplicationContext(), "먼저 사업자등록번호를 입력하세요.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                for (QueryDocumentSnapshot snapshot : task.getResult()) {
+                                    regiNum = snapshot.get("Company_Register_Number").toString();
+                                    account.setEpRegisterNum(regiNum);
+                                    if (edtTxtEpRegiNum.getText().toString().equals(account.getEpRegisterNum())) {
+                                        Toast.makeText(getApplicationContext(), "국세청에 등록된 사업자번호와 일치합니다.", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "국세청에 등록된 사업자번호와 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
             }
         });
 

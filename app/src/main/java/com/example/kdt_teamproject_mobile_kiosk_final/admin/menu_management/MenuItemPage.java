@@ -2,7 +2,6 @@ package com.example.kdt_teamproject_mobile_kiosk_final.admin.menu_management;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import com.example.kdt_teamproject_mobile_kiosk_final.model.MenuList;
 
 import java.util.List;
 
-public class MenuItemPageActivity extends Fragment {
+public class MenuItemPage extends Fragment {
 
     static Context context;
     static MenuList menuList;
@@ -25,12 +24,12 @@ public class MenuItemPageActivity extends Fragment {
     View view;
     Boolean clickable = false;
 
-    public MenuItemPageActivity(Context context, List<MenuList> menuLists) {
+    public MenuItemPage(Context context, List<MenuList> menuLists) {
         this.context = context;
         this.menuLists = menuLists;
     }
 
-    public MenuItemPageActivity() {
+    public MenuItemPage() {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,7 +50,7 @@ public class MenuItemPageActivity extends Fragment {
             menuItemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AddMenuMainActivity mainActivity = new AddMenuMainActivity();
+                    AddMenuMain mainActivity = new AddMenuMain();
 
                     String menuNum = menuLists.get(index).getMenuNum();
                     String menuName = menuLists.get(index).getMenuName();
@@ -70,7 +69,7 @@ public class MenuItemPageActivity extends Fragment {
                     String optKind02 = menuLists.get(index).getOptKind02();
                     String optPrice05 = menuLists.get(index).getOptPrice05();
                     String imgPath = menuLists.get(index).getImgPath();
-                    if (menuItemLayout.getId() == index){
+                    if (menuItemLayout.getId() == index) {
                         if (!clickable) {
                             menuItemLayout.setBackgroundResource(R.drawable.itembutton_t);
                             clickable = true;

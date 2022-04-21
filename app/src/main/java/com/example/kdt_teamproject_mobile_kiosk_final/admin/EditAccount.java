@@ -30,7 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditAccountActivity extends Fragment {
+public class EditAccount extends Fragment {
 
     EditText edtTxtEmail, edtTxtPwd, edtTxtConfirmPwd, edtTxtUserName, edtTxtUserBirthday, edtTxtEpName, edtTxtEpRegiNum, edtTxtPhoneNum, edtTxtPostNum, edtTxtAddress, edtTxtStartDate;
     Button btnSubmit, btnLeave;

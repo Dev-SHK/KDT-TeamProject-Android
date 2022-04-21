@@ -44,7 +44,11 @@ public class MenuItemLayout extends LinearLayout {
     }
 
     public void setLayout() {
-        upLoadImg = BitmapFactory.decodeFile(menuList.getImgPath());
+        if (menuList.getImgPath().equals("")) {
+            upLoadImg = BitmapFactory.decodeResource(context.getResources(), R.drawable.basic_img);
+        } else {
+            upLoadImg = BitmapFactory.decodeFile(menuList.getImgPath());
+        }
 
         LinearLayout.LayoutParams layoutMargin = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutMargin.setMargins(45, 20, 0, 0);
@@ -81,7 +85,6 @@ public class MenuItemLayout extends LinearLayout {
             this.addView(menu_Img);
             if (upLoadImg == null)
                 menu_Img.setImageResource(R.drawable.basic_img);
-//                menu_Img.setBackground(ContextCompat.getDrawable(context, R.drawable.border_round_thin));
             else
                 menu_Img.setImageBitmap(upLoadImg);
             menu_Img.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -106,7 +109,7 @@ public class MenuItemLayout extends LinearLayout {
         return BitmapFactory.decodeResource(context.getResources(), R.drawable.soldout_img);
     }
 
-    static public Bitmap overlayBitmap(Bitmap original, Context context) {
+    public static Bitmap overlayBitmap(Bitmap original, Context context) {
 
         double aspectRatio = (double) original.getHeight() / (double) original.getWidth();
 
@@ -131,13 +134,13 @@ public class MenuItemLayout extends LinearLayout {
         //하단 비트맵
         originalResizeBmp = Bitmap.createScaledBitmap(original, targetWidth, targetHeight, false);
         originalResizeBmp = originalResizeBmp.createBitmap(originalResizeBmp, startW, startH
-                , (targetWidth > targetHeight ? targetHeight : targetWidth)
-                , (targetWidth > targetHeight ? targetHeight : targetWidth));
+                , (Math.min(targetWidth, targetHeight))
+                , (Math.min(targetWidth, targetHeight)));
 
         //상단 비트맵
         Bitmap overlayBmp = Bitmap.createScaledBitmap(getOverlayBitmap(context)
-                , (targetWidth > targetHeight ? targetHeight : targetWidth)
-                , (targetWidth > targetHeight ? targetHeight : targetWidth)
+                , (Math.min(targetWidth, targetHeight))
+                , (Math.min(targetWidth, targetHeight))
                 , false);
 
         //결과값 저장을 위한 Bitmap

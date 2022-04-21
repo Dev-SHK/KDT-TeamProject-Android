@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,22 +10,23 @@
         android:layout_margin="30dp"
         android:background="@drawable/border_round"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="50dp">
 
             <TextView
                 android:id="@+id/pageName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/border_top"
+                android:gravity="center"
                 android:text="메뉴 수정"
-                android:textAlignment="center"
-                android:textSize="30dp"
-                android:textStyle="bold"
-                android:background="@drawable/border_top">
-            </TextView>
+                android:textSize="25dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="610dp"
@@ -39,8 +40,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -141,7 +141,7 @@
 
                         <Spinner
                             android:id="@+id/categorySpinner"
-                            android:layout_width="160dp"
+                            android:layout_width="110dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:spinnerMode="dropdown"
@@ -172,23 +172,22 @@
                         android:id="@+id/imgPathTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        />
+                        android:visibility="gone" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <Button
+                        <android.widget.Button
                             android:id="@+id/upLoadBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_margin="5dp"
+                            android:layout_weight="1"
                             android:background="@drawable/border_round_thin"
                             android:backgroundTint="#ffc0cb"
-                            android:text="이미지파일 업로드"/>
+                            android:text="이미지파일 업로드" />
                     </LinearLayout>
 
 
@@ -196,13 +195,14 @@
                         android:id="@+id/optSwitch01"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Size 옵션 1"/>
+                        android:text="Size 옵션 1" />
+
                     <LinearLayout
                         android:id="@+id/optLayout01_01"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        android:visibility="gone"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/optSize01_1"
@@ -226,8 +226,8 @@
                         android:id="@+id/optLayout01_02"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        android:visibility="gone"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/optPrice01_2"
@@ -252,13 +252,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:checked="false"
-                        android:text="Size 옵션 2"/>
+                        android:text="Size 옵션 2" />
+
                     <LinearLayout
                         android:id="@+id/optLayout02_01"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        android:visibility="gone"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/optSize02_1"
@@ -282,8 +283,8 @@
                         android:id="@+id/optLayout02_02"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        android:visibility="gone"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/optPrice02_2"
@@ -308,13 +309,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:checked="false"
-                        android:text="Size 옵션 3"/>
+                        android:text="Size 옵션 3" />
+
                     <LinearLayout
                         android:id="@+id/optLayout03_01"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        android:visibility="gone"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/optSize03_1"
@@ -338,8 +340,8 @@
                         android:id="@+id/optLayout03_02"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        android:visibility="gone"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/optPrice03_2"
@@ -364,13 +366,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:checked="false"
-                        android:text="Kind 옵션 1"/>
+                        android:text="Kind 옵션 1" />
+
                     <LinearLayout
                         android:id="@+id/optLayout04_01"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        android:visibility="gone"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/optKind04_1"
@@ -394,8 +397,8 @@
                         android:id="@+id/optLayout04_02"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        android:visibility="gone"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/optPrice04_2"
@@ -420,13 +423,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:checked="false"
-                        android:text="Kind 옵션 1"/>
+                        android:text="Kind 옵션 1" />
+
                     <LinearLayout
                         android:id="@+id/optLayout05_01"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        android:visibility="gone"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/optKind05_1"
@@ -450,8 +454,8 @@
                         android:id="@+id/optLayout05_02"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
-                        android:visibility="gone"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/optPrice05_2"
@@ -481,28 +485,26 @@
             android:gravity="bottom"
             android:orientation="horizontal">
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/modifyBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/border_round_thin"
-                android:backgroundTint="#ffc0cb"
-                android:text="수정"
                 android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/border_round"
+                android:text="수정"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/deleteBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/border_round_thin"
-                android:backgroundTint="#ffc0cb"
-                android:text="삭제"
                 android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/border_round"
+                android:text="삭제"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 

@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,7 +55,7 @@ public class KioskMainActivity extends AppCompatActivity {
     String strSide = "사이드";
     String strEtc = "기타";
 
-    TextView totalPrice;
+    TextView totalPrice, tvEmpty;
     int sum = 0;
     long total;
     int orderNum = 0;
@@ -79,6 +80,10 @@ public class KioskMainActivity extends AppCompatActivity {
         mAdapter = new Adapter_Cart(this);
         orderListLayout = (ListView) findViewById(R.id.orderListLayout);
         orderListLayout.setAdapter(mAdapter);
+
+        tvEmpty = findViewById(R.id.tvEmpty);
+
+        orderListLayout.setEmptyView(tvEmpty);
 
         selectAll(strMain);
 
@@ -136,115 +141,126 @@ public class KioskMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                dialogView = View.inflate(KioskMainActivity.this, R.layout.activity_paychoice, null);
+                if (mAdapter.getCount() == 0) {
+                    orderBtn.setEnabled(false);
+                    Toast.makeText(getApplicationContext(), "먼저 주문을 해주세요.", Toast.LENGTH_SHORT).show();
+                    orderBtn.setEnabled(true);
+                } else {
 
-                AlertDialog.Builder choiceDlg = new AlertDialog.Builder(KioskMainActivity.this);
-                AlertDialog alertDialog_choice = choiceDlg.create();
-                alertDialog_choice.setView(dialogView);
-                alertDialog_choice.show();
+                    dialogView = View.inflate(KioskMainActivity.this, R.layout.activity_paychoice, null);
 
-
-                qrBtn = dialogView.findViewById(R.id.qrBtn);
-                creditBtn = dialogView.findViewById(R.id.creditBtn);
-
-
-                qrBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        alertDialog_choice.dismiss();
-
-                        payment = "QR결제";
-                        Intent intent = new Intent(KioskMainActivity.this, QrScan.class);
-                        startActivity(intent);
-                    }
-
-                });
-
-                creditBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        alertDialog_choice.dismiss();
-
-                        payment = "신용카드";
-                        dialogView = View.inflate(KioskMainActivity.this, R.layout.activity_cardpay, null);
-
-                        AlertDialog.Builder cardDlg = new AlertDialog.Builder(KioskMainActivity.this);
-                        AlertDialog alertDialog_card = cardDlg.create();
-                        alertDialog_card.setTitle("카드결제");
-                        alertDialog_card.setView(dialogView);
-                        alertDialog_card.show();
-
-                        ImageView creditimg;
+                    AlertDialog.Builder choiceDlg = new AlertDialog.Builder(KioskMainActivity.this);
+                    AlertDialog alertDialog_choice = choiceDlg.create();
+                    alertDialog_choice.setView(dialogView);
+                    alertDialog_choice.show();
 
 
-                        creditimg = dialogView.findViewById(R.id.creditimg);
+                    qrBtn = dialogView.findViewById(R.id.qrBtn);
+                    creditBtn = dialogView.findViewById(R.id.creditBtn);
 
-                        creditimg.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                alertDialog_card.dismiss();
 
-                                LocalDate localDate = LocalDate.now();
-                                LocalTime localTime = LocalTime.now();
+                    qrBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog_choice.dismiss();
 
-                                int hour = localTime.getHour();
-                                int min = localTime.getMinute();
-                                int sec = localTime.getSecond();
+                            payment = "QR결제";
+                            Intent intent = new Intent(KioskMainActivity.this, QrScan.class);
+                            startActivity(intent);
+                        }
 
-                                String currentTime = String.format("%s %d:%d:%d", localDate, hour, min, sec);
+                    });
 
-                                dialogView = View.inflate(KioskMainActivity.this, R.layout.activity_order_finish, null);
+                    creditBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            alertDialog_choice.dismiss();
 
-                                AlertDialog.Builder completeDlg = new AlertDialog.Builder(KioskMainActivity.this);
-                                completeDlg.setTitle("결제완료");
-                                completeDlg.setView(dialogView);
-                                TextView people;
-                                people = dialogView.findViewById(R.id.people);
-                                people.setText(String.format("결제가 완료되었습니다. 대기번호는 %d번 입니다.", orderNum));
-                                completeDlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Map<String, Object> dataMap = new HashMap<>();
-                                        dataMap.put("OrderState", "정상");
-                                        dataMap.put("OrderNum", String.valueOf(orderNum));
-                                        dataMap.put("OrderDateTime", currentTime);
-                                        dataMap.put("OrderPayment", payment);
-                                        dataMap.put("TotalPrice", totalPrice.getText().toString());
-                                        fb.collection("Enterprise_Users").document(emailId).collection("OrderList")
-                                                .document(currentTime).set(dataMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void unused) {
-                                                Log.i("ORDER : ", "주문 성공");
-                                            }
-                                        });
+                            payment = "신용카드";
+                            dialogView = View.inflate(KioskMainActivity.this, R.layout.activity_cardpay, null);
 
-                                        orderNum++;
-                                    }
-                                });
-                                completeDlg.show();
-                                mAdapter.clear();
-                                sum = 0;
+                            AlertDialog.Builder cardDlg = new AlertDialog.Builder(KioskMainActivity.this);
+                            AlertDialog alertDialog_card = cardDlg.create();
+                            alertDialog_card.setTitle("카드결제");
+                            alertDialog_card.setView(dialogView);
+                            alertDialog_card.show();
 
-                            }
-                        });
-                    }
-                });
+                            ImageView creditimg;
+
+
+                            creditimg = dialogView.findViewById(R.id.creditimg);
+
+                            creditimg.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    alertDialog_card.dismiss();
+
+                                    LocalDate localDate = LocalDate.now();
+                                    LocalTime localTime = LocalTime.now();
+
+                                    int hour = localTime.getHour();
+                                    int min = localTime.getMinute();
+                                    int sec = localTime.getSecond();
+
+                                    String currentTime = String.format("%s %d:%d:%d", localDate, hour, min, sec);
+
+                                    dialogView = View.inflate(KioskMainActivity.this, R.layout.activity_order_finish, null);
+
+                                    AlertDialog.Builder completeDlg = new AlertDialog.Builder(KioskMainActivity.this);
+                                    completeDlg.setTitle("결제완료");
+                                    completeDlg.setView(dialogView);
+                                    TextView people;
+                                    people = dialogView.findViewById(R.id.people);
+                                    people.setText(String.format("결제가 완료되었습니다. 대기번호는 %d번 입니다.", orderNum));
+                                    completeDlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Map<String, Object> dataMap = new HashMap<>();
+                                            dataMap.put("OrderState", "정상");
+                                            dataMap.put("OrderNum", String.valueOf(orderNum));
+                                            dataMap.put("OrderDateTime", currentTime);
+                                            dataMap.put("OrderPayment", payment);
+                                            dataMap.put("TotalPrice", totalPrice.getText().toString());
+                                            fb.collection("Enterprise_Users").document(emailId).collection("OrderList")
+                                                    .document(currentTime).set(dataMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Log.i("ORDER : ", "주문 성공");
+                                                    Dialog_menu.totalPrice.setText("");
+                                                }
+                                            });
+
+                                            orderNum++;
+                                        }
+                                    });
+                                    completeDlg.show();
+                                    mAdapter.clear();
+                                    sum = 0;
+
+                                }
+                            });
+                        }
+                    });
+                }
             }
         });
-    }
 
-    // 전체 삭제
-    public void onClick (View v) {
-        switch (v.getId()) {
-            case R.id.btn_clear: {
-                Toast.makeText(getApplicationContext(), "전체 삭제 입니다", Toast.LENGTH_SHORT).show();
-                mAdapter.clear();
-                // 합계 금액 초기화
-                sum = 0;
-                Dialog_menu.setTotalPrice(sum);
-                break;
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mAdapter.getCount() == 0) {
+                    orderBtn.setEnabled(false);
+                    Toast.makeText(getApplicationContext(), "현재 목록이 비어 있어요.", Toast.LENGTH_SHORT).show();
+                    orderBtn.setEnabled(true);
+                } else {
+                    Toast.makeText(getApplicationContext(), "전체 삭제 되었어요.", Toast.LENGTH_SHORT).show();
+                    mAdapter.clear();
+                    sum = 0;
+                    Dialog_menu.setTotalPrice(sum);
+                }
             }
-        }
+        });
+
     }
 
     public void selectAll(String btnType) {

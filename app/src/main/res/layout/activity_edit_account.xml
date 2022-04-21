@@ -7,7 +7,7 @@
     android:layout_margin="50dp"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".admin.EditAccountActivity">
+    tools:context=".admin.EditAccount">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,9 +46,9 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/border_round_thin"
             android:ems="10"
+            android:enabled="false"
             android:hint="name@example.com"
             android:inputType="textEmailAddress"
-            android:enabled="false"
             android:padding="10dp" />
 
         <LinearLayout
@@ -95,9 +95,9 @@
                 android:layout_marginHorizontal="10dp"
                 android:background="@drawable/border_round_thin"
                 android:ems="10"
+                android:enabled="false"
                 android:hint="비밀번호"
                 android:inputType="textPassword"
-                android:enabled="false"
                 android:padding="10dp" />
 
             <EditText
@@ -107,9 +107,9 @@
                 android:layout_marginHorizontal="10dp"
                 android:background="@drawable/border_round_thin"
                 android:ems="10"
+                android:enabled="false"
                 android:hint="비밀번호 확인"
                 android:inputType="textPassword"
-                android:enabled="false"
                 android:padding="10dp" />
 
         </LinearLayout>
@@ -144,13 +144,12 @@
                 android:inputType="number"
                 android:padding="10dp" />
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/btnEpRegisterNumAuth"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="10dp"
                 android:background="@drawable/border_round_thin"
-                android:backgroundTint="#ffc0cb"
                 android:text="사업자번호 확인" />
 
         </LinearLayout>
@@ -166,33 +165,33 @@
                 android:id="@+id/edtTxtStartDate"
                 android:layout_width="200dp"
                 android:layout_height="50dp"
+                android:layout_marginHorizontal="10dp"
                 android:background="@drawable/border_round_thin"
                 android:ems="10"
                 android:hint="개업일자"
                 android:inputType="date"
-                android:layout_marginHorizontal="10dp"
                 android:padding="10dp" />
 
             <EditText
                 android:id="@+id/edtTxtPhoneNum"
                 android:layout_width="200dp"
                 android:layout_height="50dp"
+                android:layout_marginHorizontal="5dp"
                 android:background="@drawable/border_round_thin"
                 android:ems="10"
                 android:hint="연락처"
                 android:inputType="text"
-                android:layout_marginHorizontal="5dp"
                 android:padding="10dp" />
 
             <EditText
                 android:id="@+id/edtTxtPostNum"
                 android:layout_width="200dp"
                 android:layout_height="50dp"
+                android:layout_marginHorizontal="10dp"
                 android:background="@drawable/border_round_thin"
                 android:ems="10"
                 android:hint="우편번호"
                 android:inputType="number"
-                android:layout_marginHorizontal="10dp"
                 android:padding="10dp" />
 
         </LinearLayout>
@@ -217,22 +216,20 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btnSubmit"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:background="@drawable/border_round_thin"
-            android:backgroundTint="#ffc0cb"
             android:text="수정하기" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btnLeave"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:background="@drawable/border_round_thin"
-            android:backgroundTint="#ffc0cb"
             android:text="탈퇴하기" />
     </LinearLayout>
 

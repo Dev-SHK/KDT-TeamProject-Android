@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +16,8 @@
         android:theme="@style/Theme.KDT_TeamProject_Mobile_Kiosk_Final">
         <activity
             android:name=".admin.orderList.OrderList_BaseAdapter"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -35,15 +37,15 @@
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".admin.menu_management.EditMenuPageActivity"
+            android:name=".admin.menu_management.EditMenuPage"
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".admin.menu_management.AddMenuMainActivity"
+            android:name=".admin.menu_management.AddMenuMain"
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".admin.menu_management.AddMenuPageActivity"
+            android:name=".admin.menu_management.AddMenuPage"
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity
@@ -53,7 +55,7 @@
             android:name=".ModeSelectActivity"
             android:exported="false" />
         <activity
-            android:name=".admin.EditAccountActivity"
+            android:name=".admin.EditAccount"
             android:exported="false"
             tools:ignore="Instantiatable" />
         <activity

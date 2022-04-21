@@ -4,43 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     android:layout_margin="50dp"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".admin.LoginActivity">
 
     <TextView
+        android:id="@+id/txtvLoginWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="반가워요"
-        android:textSize="60dp"
         android:textAlignment="center"
-        android:id="@+id/txtvLoginWelcome" />
+        android:textSize="60dp" />
 
 
     <EditText
         android:id="@+id/edtTxtEmail"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:textAlignment="center"
-        android:hint="이메일을 입력하세요"
-        android:text="test@email.com"
         android:layout_marginTop="50dp"
-        android:inputType="textEmailAddress" />
+        android:ems="10"
+        android:hint="이메일을 입력하세요"
+        android:inputType="textEmailAddress"
+        android:text="test@email.com"
+        android:textAlignment="center" />
 
     <EditText
         android:id="@+id/edtTxtPwd"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:layout_marginTop="10dp"
-        android:textAlignment="center"
-        android:text="test123"
+        android:ems="10"
         android:hint="비밀번호를 입력하세요"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:text="test123"
+        android:textAlignment="center" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnLogin"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
         android:backgroundTint="#ffc0cb"
         android:text="로그인" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/btnRegister"
         android:layout_width="300dp"
         android:layout_height="wrap_content"

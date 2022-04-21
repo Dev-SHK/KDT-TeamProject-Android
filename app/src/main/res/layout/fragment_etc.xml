@@ -6,12 +6,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <GridLayout
             android:id="@+id/grid_etc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20dp">
-        </GridLayout>
+            android:layout_margin="20dp" />
     </ScrollView>
 
 </FrameLayout>
